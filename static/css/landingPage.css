@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;    
+}
+
+body{
+    background-image: url("/static/images/bg-laranjas.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.conteudo{
+    height: 100vh;
+    min-width: 100vw;
+}
+
+.logo {
+    width: 175px;
+}
+
+.vetor{
+    width: 797px;
+}
