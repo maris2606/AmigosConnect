@@ -1,24 +1,60 @@
+html{
+    font-size: 62.5%;
+}
+
 * {
     margin: 0;
     padding: 0;    
+    border: none;
 }
 
 body{
-    background-image: url("/static/images/bg-laranjas.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("/static/images/bg-laranjas.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+    
+}
+.onda{
+    position: absolute;
+    top: calc(100vh - 335px);
+    width: 100vw;
+    z-index: -1;
 }
 
 .conteudo{
+    padding: 0;
     height: 100vh;
-    min-width: 100vw;
+    min-width: 100%;
 }
 
 .logo {
     width: 175px;
 }
 
-.vetor{
-    width: 797px;
+.link-conecte {
+    color: white;
+    display: block;
+    width: 100%;
+    background: linear-gradient(-30deg,#FF5C00, #993700);
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.titulo {
+    font-size: 4rem;
+}
+
+p{
+    font-size: 2.4rem;
+}
+
+a{
+    font-size: 2.4rem;
+    font-weight: 500;
+}
+
+.card-texto-1{
+    border-radius: 0 20px 20px 0;
+    padding: 30px;
 }
