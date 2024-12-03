@@ -50,7 +50,7 @@ label {
     font-size: 2rem;
 }
 
-.check-manter{
+.check{
     width: 24px;
     height: 24px;
     margin-right: 15px;
@@ -60,7 +60,7 @@ label {
     height: 48px;
 }
 
-.btn-entrar {
+.btn-acesso {
     font-size: 2.4rem;
     color: white;
     display: block;
@@ -70,7 +70,7 @@ label {
     transition: all 200ms ease-in-out;
 }
 
-.btn-entrar:hover{
+.btn-acesso:hover{
     color: white;
     text-decoration: none;
     transform: scale(1.05);
@@ -94,7 +94,7 @@ label {
 }
 
 .cadastro {
-    padding: 10%;
+    padding-block: 5%;
     background: #d9d9d9;
     min-height: 100vh;
 }
@@ -103,7 +103,11 @@ label {
     height: 90vh;
 }
 
-.content-card-cadastro{
-    padding: 30px 20px;
-    height: 90%;
+.declaro-aceito-label{
+    font-size: 1.5rem;
+}
+
+.span-declaro-aceito{
+    margin-top: 70px;
+    margin-bottom: 20px;
 }

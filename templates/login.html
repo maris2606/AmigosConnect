@@ -27,21 +27,21 @@
                         <form class="row p-5 h-100 d-flex flex-column justify-content-between" action="">
 
                             <label class="row" for="usuario">Usuário (username ou email):</label>
-                            <input class="row input-text" type="text" name="usuario" id="usuario">
-
+                            <input class="row input-text" type="text" name="usuario" id="usuario" placeholder="Digite seu usuário ou email">
+        
                             <label class="row" for="senha">Senha:</label>
-                            <input class="row input-text" type="password" name="senha" id="senha">
+                            <input class="row input-text" type="password" name="senha" id="senha" placeholder="Digite sua senha">
 
                             <a class="row link-esqueci align-self-end" href="/templates/esqueci-senha.html">esqueci ou quero alterar minha senha</a>
 
                             <span class="row d-flex align-items-center ">
-                                <input class="check-manter" type="checkbox" name="manter-logado" id="manter_logado"> 
+                                <input class="check" type="checkbox" name="manter-logado" id="manter_logado"> 
                                 <label class="manter-logado-label" for="manter-logado">manter-me logado</label>
                             </span>
 
                             <div class="row botoes-login d-flex justify-content-between text-center">
                                 <a class="col-5 link-cadastre" href="cadastro.html">Cadastre-se</a>
-                                <button class="col-5 btn-entrar" type="submit">Entrar</button>
+                                <button class="col-5 btn-acesso" type="submit">Entrar</button>
                             </div>
                         
                         </form>
