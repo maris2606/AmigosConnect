@@ -8,24 +8,21 @@ html{
     border: none;
 }
 
-body{
+.onda{
+    position: absolute;
+    top: calc(100vh - 331px);
+    width: 100vw;
+}
+
+.conteudo-1{
+    padding: 0;
+    height: 100vh;
+    min-width: 100%;
+
     background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("/static/images/bg-laranjas.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    
-}
-.onda{
-    position: absolute;
-    top: calc(100vh - 335px);
-    width: 100vw;
-    z-index: -1;
-}
-
-.conteudo{
-    padding: 0;
-    height: 100vh;
-    min-width: 100%;
 }
 
 .logo {
@@ -57,4 +54,25 @@ a{
 .card-texto-1{
     border-radius: 0 20px 20px 0;
     padding: 30px;
+    z-index: 1;
+}
+
+
+.conteudo-2{
+    padding: 0;
+    height: 100vh;
+    min-width: 100%;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("/static/images/bg-laranjas.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.quadro {
+    background-color: #fff;
+}
+
+.img-pg-2{
+    border-radius: 0% 100% 0% 0% / 0% 100% 0% 0% ;
 }
