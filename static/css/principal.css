@@ -1,0 +1,28 @@
+html{
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;    
+    border: none;
+}
+
+.feed{
+    min-height: 100vh;
+}
+
+
+.pfp-usuario{
+    height: 50px;
+    border-radius: 100px;
+}
+
+.logo {
+    width: 180px;
+    margin-bottom: 40%;
+}
+
+.feed-main{
+    background: linear-gradient(90deg, #F0C674, #F38D44);
+}
