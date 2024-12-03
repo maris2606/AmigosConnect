@@ -8,8 +8,30 @@ html{
     border: none;
 }
 
-.feed{
-    min-height: 100vh;
+.barra-lateral{
+    font-size: 2rem;
+}
+
+.barra-lateral p{
+    padding-left: 15px;
+}
+
+.barra-lateral a{
+    height: 31px;
+    color: black;
+    transition: ease-in-out 200ms all;
+}
+
+.barra-lateral a:hover{
+    color: black;
+    text-decoration: none;
+
+    transform: scale(1.02);
+}
+
+
+.barra-lateral a > img{
+    height: 31px;
 }
 
 
@@ -23,6 +45,63 @@ html{
     margin-bottom: 40%;
 }
 
+
+.feed{
+    height: 100vh;
+    position: static;
+}
+
 .feed-main{
+    height: 200vh;
     background: linear-gradient(90deg, #F0C674, #F38D44);
+}
+
+.barra-topo {
+    height: 45px;
+
+}
+
+.pesquisa{
+    padding-inline: 25px;
+    font-size: 2rem;
+    border-radius: 100px;
+}
+
+.btn-pesquisa{
+    position: absolute;
+    top: 22%;
+    right: 4%;
+    z-index: 2;
+    background-color: rgba(0,0,0,0);
+
+    transition: all 200ms ease-in-out;
+}
+
+.btn-pesquisa:focus{
+    outline: none;
+}
+
+.btn-pesquisa:hover{
+    transform: scale(1.1);
+}
+
+.icone-pesquisa{
+    height: 25px;
+}
+
+
+.btn-criar-connect {
+    font-size: 2rem;
+    color: white;
+    display: block;
+    background: linear-gradient(30deg,#FF5C00, #993700);
+    padding: 10px;
+    border-radius: 30px;
+    transition: all 200ms ease-in-out;
+}
+
+.btn-criar-connect:hover{
+    color: white;
+    text-decoration: none;
+    transform: scale(1.05);
 }
