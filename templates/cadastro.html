@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmigosConnect</title>
+
+
+    <link rel="stylesheet" href="../static/css/loginCadastro.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container-fluid cadastro d-flex justify-content-center align-items-center p-0">
+        <div class="row w-100 h-100 card-cadastro d-flex justify-content-center align-items-center">
+
+            <div class="col-6 rounded h-100 d-flex justify-content-center align-items-center bg-white">
+
+                <div class="row w-100 content-card-cadastro">
+
+                    <div class="col-6 h-100 d-flex flex-column justify-content-between">
+                        <img class="row logo-h align-self-center" src="/static/icons/logo-nome-h.svg" alt="logo amigosConnect">
+
+                        <form class="row p-5 h-100 d-flex flex-column justify-content-between" action="">
+
+                            <label class="row" for="usuario">Usuário (username ou email):</label>
+                            <input class="row input-text" type="text" name="usuario" id="usuario">
+
+                            <label class="row" for="senha">Senha:</label>
+                            <input class="row input-text" type="password" name="senha" id="senha">
+
+                            <a class="row link-esqueci align-self-end" href="/templates/esqueci-senha.html">esqueci ou quero alterar minha senha</a>
+
+                            <span class="row d-flex align-items-center ">
+                                <input class="check-manter" type="checkbox" name="manter-logado" id="manter_logado"> 
+                                <label class="manter-logado-label" for="manter-logado">manter-me logado</label>
+                            </span>
+
+                            <div class="row botoes-login d-flex justify-content-between text-center">
+                                <a class="col-5 link-cadastre" href="cadastro.html">Cadastre-se</a>
+                                <button class="col-5 btn-entrar" type="submit">Entrar</button>
+                            </div>
+                        
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
