@@ -1,11 +1,39 @@
 html{
     font-size: 62.5%;
+    scroll-behavior: smooth;
 }
 
 * {
     margin: 0;
     padding: 0;    
     border: none;
+}
+
+header {
+    width: 100%;
+    height: 0;
+    display: absolute;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.links-header {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 15px;
+}
+
+.links-header a{
+    color: white;
+    margin-inline: 15px;
+}
+
+.links-header a:hover{
+    color: rgb(109, 64, 22);
+    text-decoration: none;
+    margin-inline: 15px;
 }
 
 .onda{
@@ -33,9 +61,16 @@ html{
     color: white;
     display: block;
     width: 100%;
-    background: linear-gradient(-30deg,#FF5C00, #993700);
+    background: linear-gradient(30deg,#FF5C00, #993700);
     padding: 10px;
     border-radius: 30px;
+    transition: all 200ms ease-in-out;
+}
+
+.link-conecte:hover{
+    color: white;
+    text-decoration: none;
+    transform: scale(1.05);
 }
 
 .titulo {
@@ -51,8 +86,8 @@ a{
     font-weight: 500;
 }
 
-.card-texto-1{
-    border-radius: 0 20px 20px 0;
+.card-texto{
+    border-radius: 0 40px 40px 0;
     padding: 30px;
     z-index: 1;
 }
@@ -63,16 +98,58 @@ a{
     height: 100vh;
     min-width: 100%;
 
-    background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("/static/images/bg-laranjas.jpg");
+    background-image: linear-gradient(rgba(240, 198, 115, 1), rgba(240, 198, 115, 0)), url("/static/images/bg-pattern.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
 }
 
 .quadro {
+    border-radius: 20px;
     background-color: #fff;
+    font-size: 2.4rem;
+    transition: all 200ms ease-in-out;
 }
 
-.img-pg-2{
-    border-radius: 0% 100% 0% 0% / 0% 100% 0% 0% ;
+.quadro:hover {
+    transform: scale(1.02);
 }
+
+.titulo-quadro {
+    font-size: 3.6rem;
+}
+
+
+.conteudo-3{
+    padding: 0;
+    height: 100vh;
+    min-width: 100%;
+
+    background-image: linear-gradient(rgba(0, 0, 0,0), rgba(0, 0, 0, 0.3)), url("/static/images/bg-laranja-2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.icone {
+    height: 196px;
+    border-radius: 100px;
+}
+
+.link-github {
+    border-radius: 50px;
+    border: 3px white solid;
+    padding: 15px;
+    color: white;
+    display: block;
+    width: 100%;
+    text-align: center;
+    transition: all 200ms ease-in-out;
+}
+
+.link-github:hover{
+    color: rgb(109, 64, 22);
+    text-decoration: none;
+    background: white;
+}
+

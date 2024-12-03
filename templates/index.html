@@ -10,9 +10,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container conteudo-1 d-flex align-items-center p-0 w-100">
+
+    <header>
+        <div class="links-header">
+            <a href="#conectar" class="link-header">Conectar</a>
+
+            <a href="#vantagens" class="link-header">Vantagens</a>
+            
+            <a href="#sobre_nos" class="link-header">Sobre nós</a>
+        </div>
+    </header>
+
+    <div id="conectar" class="container-fluid conteudo-1 d-flex align-items-center p-0">
         <div class="row w-100 h-75">
-            <div class="d-flex flex-column justify-content-between align-items-center bg-white card-texto-1">
+            <div class="d-flex flex-column justify-content-between align-items-center bg-white card-texto">
                 <img class="logo" src="../static/icons/logo-nome-v.svg" alt="logo amigos connect">
 
                 <h1 class="titulo align-self-start">Conecte-se, organize e viva <br>os momentos que <br>importam</h1>
@@ -32,34 +43,70 @@
 
     <img class="onda w-100" src="/static/images/wave.svg" alt="onda decorativa">
 
-    <div class="container conteudo-2 d-flex align-items-center justify-content-center p-0 w-100">
-        <div class="row d-flex align-items-center justify-content-between w-100 h-75 p-5">
-            <div class="col-3 quadro p-5 m-3">
-                <img class="img-pg-2" src="" alt="">
-                <h1>
-
+    <div id="vantagens" class="container-fluid conteudo-2 d-flex align-items-center justify-content-center p-0">
+        <div class="row d-flex flex-row flex-nowrap align-items-center justify-content-between w-100 h-75 p-5">
+            <div class="quadro d-flex flex-column justify-content-between align-items-center p-5 m-5 w-100 h-100">
+                <h1 class="titulo-quadro">
+                    Fortaleça Conexões e Descubra Novos Grupos
                 </h1>
                 <p>
-                    
+                    Reforce os laços com amigos criando oportunidades únicas para momentos compartilhados. O 
+                    <strong>AmigosConnect</strong> é a plataforma ideal para facilitar conexões autênticas em sua comunidade.
                 </p>
             </div>
-            <div class="col-3 quadro p-5 m-3">
-                <img class="img-pg-2" src="" alt="">
-                <h1>
-
+            <div class="quadro d-flex flex-column justify-content-between align-items-center p-5 m-5 w-100 h-100">
+                <h1 class="titulo-quadro">
+                    Planeje Atividades e Viva Experiências Memoráveis
                 </h1>
                 <p>
-                    
+                    Simplifique a organização de passeios e eventos, reunindo pessoas para compartilhar lazer e diversão. 
+                    Promova momentos que valorizam a interação social e o bem-estar coletivo.
                 </p>
             </div>
-            <div class="col-3 quadro p-5 m-3">
-                <img class="img-pg-2" src="" alt="">
-                <h1>
-
+            <div class="quadro d-flex flex-column justify-content-between align-items-center p-5 m-5 w-100 h-100">
+                <h1 class="titulo-quadro">
+                    Design Personalizado para Uma Experiência Única
                 </h1>
                 <p>
-                    
+                    O <strong>AmigosConnect</strong> oferece um ambiente acolhedor e funcional. 
+                    Recursos como o modo escuro garantem conforto visual, enquanto o design moderno e responsivo transforma sua navegação em algo prazeroso.
                 </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="sobre_nos" class="container-fluid conteudo-3 d-flex flex-column align-items-center justify-content-center p-0">
+        <div class="row">
+            <div class="col h-25 w-100 d-flex justify-content-center align-items-center">
+                <h1 class="titulo">Sobre nós</h1>
+            </div>
+        </div>
+        <div class="row d-flex flex-row flex-nowrap align-items-center justify-content-between w-100 p-5">
+           <div class="col p-5 m-5 h-100 w-100 d-flex flex-column align-items-center justify-content-between">
+            <img class="icone" src="/static/team/joao.jpeg" alt="João">
+            <p class="text-center">João Pedro de Oliveira Felix</p>
+           </div>
+
+           <div class="col p-5 m-5 h-100 w-100 d-flex flex-column align-items-center justify-content-between">
+            <img class="icone" src="/static/team/jossana.jpg" alt="Jossana">
+            <p class="text-center">Jossana Kelly Tavares Marques</p>
+           </div>
+
+           <div class="col p-5 m-5 h-100 w-100 d-flex flex-column align-items-center justify-content-between">
+            <img class="icone" src="/static/team/maris.jpg" alt="Marisa">
+            <p class="text-center">Marisa Mayumi Morita Ouchi</p>
+           </div>
+
+           <div class="col p-5 m-5 h-100 w-100 d-flex flex-column align-items-center justify-content-between">
+            <img class="icone" src="/static/team/millena.jpeg" alt="Millena">
+            <p class="text-center">Millena Nunes Cupolillo</p>
+           </div>
+
+        </div>
+
+        <div class="row w-25 d-flex align-items-center">
+            <div class="col h-25 w-100 d-flex justify-content-center align-items-center">
+                <a class="link-github" href="https://github.com/maris2606/AmigosConnect">Link do Github</a>
             </div>
         </div>
     </div>
