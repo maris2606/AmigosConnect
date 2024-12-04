@@ -116,14 +116,14 @@ html{
     font-size: 1.6rem;
 }
 
-.posts{
-    gap: 10px;
-}
+
 
 .post{
+    width: 49% !important;
     padding-top: 5px;
     padding-bottom: 20px;
     padding-inline: 10px;
+    box-sizing: border-box; 
 }
 
 .post-user{
@@ -150,5 +150,14 @@ html{
 
 .pic-post{
     width: 100%;
-    height: 300px;
+    height: auto;
+}
+
+.btn-mais {
+    height: 30px;
+    background: white;
+}
+
+.btn-mais:focus{
+    outline: none;
 }
