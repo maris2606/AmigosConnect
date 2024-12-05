@@ -9,6 +9,8 @@ html{
 }
 
 .barra-lateral{
+    height: 100vh;
+    position: sticky;
     font-size: 2rem;
 }
 
@@ -17,7 +19,7 @@ html{
 }
 
 .barra-lateral a{
-    height: 31px;
+    height: 40px;
     color: black;
     transition: ease-in-out 200ms all;
 }
@@ -35,8 +37,8 @@ html{
 }
 
 
-.pfp-usuario{
-    height: 50px;
+#pfp_usuario{
+    height: 40px;
     border-radius: 100px;
 }
 
@@ -47,12 +49,11 @@ html{
 
 
 .feed{
-    height: 100vh;
+    min-height: 100vh;
     position: static;
 }
 
 .feed-main{
-    height: 200vh;
     background: linear-gradient(90deg, #F0C674, #F38D44);
 }
 
@@ -104,4 +105,59 @@ html{
     color: white;
     text-decoration: none;
     transform: scale(1.05);
+}
+
+.pfp-pic{
+    height: 40px;
+    border-radius: 50px;
+}
+
+.username{
+    font-size: 1.6rem;
+}
+
+
+
+.post{
+    width: 49% !important;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    padding-inline: 10px;
+    box-sizing: border-box; 
+}
+
+.post-user{
+    padding: 15px;
+}
+
+.icon-btn{
+    height: 30px;
+}
+
+.btn-post{
+    background: white;
+    font-size: 1.5rem;
+}
+
+.btn-post:focus{
+    outline: none;
+}
+
+.media-post{
+    margin: 0;
+    padding-inline: 10;
+}
+
+.pic-post{
+    width: 100%;
+    height: auto;
+}
+
+.btn-mais {
+    height: 30px;
+    background: white;
+}
+
+.btn-mais:focus{
+    outline: none;
 }

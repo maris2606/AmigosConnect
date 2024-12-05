@@ -22,12 +22,14 @@ header {
     display: flex;
     align-items: center;
     justify-content: end;
-    padding: 15px;
+    padding-top: 15px;
 }
 
 .links-header a{
     color: white;
     margin-inline: 15px;
+
+    transition: all ease-in-out 100ms;
 }
 
 .links-header a:hover{
@@ -38,7 +40,7 @@ header {
 
 .onda{
     position: absolute;
-    top: calc(100vh - 331px);
+    top: calc(100vh - 370px);
     width: 100vw;
 }
 
@@ -65,6 +67,7 @@ header {
     padding: 10px;
     border-radius: 30px;
     transition: all 200ms ease-in-out;
+    margin-bottom: 30px;
 }
 
 .link-conecte:hover{
@@ -87,8 +90,9 @@ a{
 }
 
 .card-texto{
-    border-radius: 0 40px 40px 0;
+    border-radius: 40px;
     padding: 30px;
+    padding-left: 50px !important;
     z-index: 1;
 }
 
