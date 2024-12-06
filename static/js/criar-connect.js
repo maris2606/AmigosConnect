@@ -3,6 +3,7 @@ const amgs_selecionados = document.querySelector('.amigos-selecionados');
 
 const amgs_select = document.querySelector('#amigos_select');
 
+const btn_cancelar = document.querySelector('.cancelar');
 
 
 amgs_select.addEventListener('change',(e)=>{
@@ -29,3 +30,6 @@ amgs_select.addEventListener('change',(e)=>{
 });
 
 
+btn_cancelar.addEventListener('click', ()=>{
+    window.location.href = '/templates/feed.html';
+});

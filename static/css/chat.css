@@ -93,6 +93,11 @@ html{
     border-radius: 50px;
 }
 
+.pfp-pic-msg{
+    height: 30px;
+    border-radius: 50px;
+}
+
 .username{
     font-size: 1.6rem;
 }
@@ -108,6 +113,8 @@ html{
 
 
 .barra-mensagem {
+    
+    padding-top: 10px;
     padding-bottom: 40px;
 }
 
@@ -157,6 +164,7 @@ html{
 }
 
 .barra-topo {
+    width: 97%;
     height: 15%;
     border-radius: 15px;
 }
@@ -170,8 +178,37 @@ html{
 }
 
 .chat{
-    min-height: 70vh;
-    height: 70vh;
+    width: 97%;
+    padding-block: 15px;
+    height: 75vh;
     overflow-y: auto; 
     overflow-x: hidden; 
+}
+
+.mensagem {
+    width: max-content;
+    max-width: 55%;
+    border-radius: 5px;
+    font-size: 2rem;
+    background-color: var(--more-light-yellow-color);
+}
+
+.user-msg {
+    font-weight: 600;
+}
+
+.hora-msg{
+    font-size: 1.5rem;
+}
+
+.recebida{
+    height: min-content;
+    width: 100%;
+    justify-content: start;
+}
+
+.enviada{
+    height: min-content;
+    width: 100%;
+    justify-content: end;
 }
