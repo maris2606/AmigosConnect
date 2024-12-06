@@ -1,0 +1,19 @@
+
+:root{
+
+    --dark-blue-color: #0a1128; 
+    --orange-color: #FF5C00; 
+    --orange-dark: #993700; 
+    --light-gray-color: #eeeeee; 
+    --white-color: #ffffff; 
+    --black-color: #000000;
+    --gray-color: #d9d9d9; 
+    --brown-color: #6d4016;
+    --light-yellow-color: #f0c673;
+    --more-light-yellow-color: #FFF1C3;
+    --light-orange-color: #F38D44;
+    --more-light-orange-color: #FB9954;
+    --transparent-color: rgba(0, 0, 0, 0); 
+
+    
+}

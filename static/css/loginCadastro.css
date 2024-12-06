@@ -9,9 +9,8 @@ html{
 }
 
 
-
 .login {
-    background: #d9d9d9;
+    background: var(--gray-color);
     height: 100vh;
     
 }
@@ -36,7 +35,7 @@ label {
     font-size: 2rem;
     height: 63px;
     border-radius: 9px;
-    background-color: #d9d9d9;
+    background-color: var(--gray-color);
     margin-bottom: 15px;
     padding-inline: 20px;
 }
@@ -62,40 +61,40 @@ label {
 
 .btn-acesso {
     font-size: 2.4rem;
-    color: white;
+    color: var(--white-color);
     display: block;
-    background: linear-gradient(30deg,#FF5C00, #993700);
+    background: linear-gradient(30deg, var(--orange-color), var(--orange-dark));
     padding: 10px;
     border-radius: 30px;
     transition: all 200ms ease-in-out;
 }
 
 .btn-acesso:hover{
-    color: white;
+    color: var(--white-color);
     text-decoration: none;
     transform: scale(1.05);
 }
 
 .link-cadastre {
     font-size: 2.4rem;
-    color: #FF5C00;
+    color: var(--orange-color);
     display: block;
-    border: 3px solid #FF5C00;
+    border: 3px solid var(--orange-color);
     padding: 10px;
     border-radius: 30px;
     transition: all 200ms ease-in-out;
 }
 
 .link-cadastre:hover{
-    color: white;
-    background-color: #FF5C00;
+    color: var(--white-color);
+    background-color: var(--orange-color);
     text-decoration: none;
     transform: scale(1.05);
 }
 
 .cadastro {
     padding-block: 5%;
-    background: #d9d9d9;
+    background: var(--gray-color);
     min-height: 100vh;
 }
 

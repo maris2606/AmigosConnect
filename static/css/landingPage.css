@@ -15,7 +15,7 @@ header {
     display: absolute;
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 3;
 }
 
 .links-header {
@@ -26,21 +26,22 @@ header {
 }
 
 .links-header a{
-    color: white;
+    color: var(--white-color);
     margin-inline: 15px;
 
     transition: all ease-in-out 100ms;
 }
 
 .links-header a:hover{
-    color: rgb(109, 64, 22);
+    color: var(--brown-color);
     text-decoration: none;
     margin-inline: 15px;
 }
 
 .onda{
     position: absolute;
-    top: calc(100vh - 370px);
+    bottom:0;
+    z-index: 0;
     width: 100vw;
 }
 
@@ -60,18 +61,19 @@ header {
 }
 
 .link-conecte {
-    color: white;
+    color: var(--white-color);
     display: block;
     width: 100%;
-    background: linear-gradient(30deg,#FF5C00, #993700);
+    background: linear-gradient(30deg, var(--orange-color), var(--orange-dark));
     padding: 10px;
     border-radius: 30px;
     transition: all 200ms ease-in-out;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 15px;
 }
 
 .link-conecte:hover{
-    color: white;
+    color: var(--white-color);
     text-decoration: none;
     transform: scale(1.05);
 }
@@ -89,10 +91,13 @@ a{
     font-weight: 500;
 }
 
+.imagem-amigos{
+    z-index: 2;
+}
+
 .card-texto{
     border-radius: 40px;
     padding: 30px;
-    padding-left: 50px !important;
     z-index: 1;
 }
 
@@ -102,7 +107,7 @@ a{
     height: 100vh;
     min-width: 100%;
 
-    background-image: linear-gradient(rgba(240, 198, 115, 1), rgba(240, 198, 115, 0)), url("/static/images/bg-pattern.png");
+    background-image: linear-gradient(var(--light-yellow-color), rgba(240, 198, 115, 0)), url("/static/images/bg-pattern.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -110,7 +115,7 @@ a{
 
 .quadro {
     border-radius: 20px;
-    background-color: #fff;
+    background-color: var(--white-color);
     font-size: 2.4rem;
     transition: all 200ms ease-in-out;
 }
@@ -142,9 +147,9 @@ a{
 
 .link-github {
     border-radius: 50px;
-    border: 3px white solid;
+    border: 3px var(--white-color) solid;
     padding: 15px;
-    color: white;
+    color: var(--white-color);
     display: block;
     width: 100%;
     text-align: center;
@@ -152,8 +157,8 @@ a{
 }
 
 .link-github:hover{
-    color: rgb(109, 64, 22);
+    color: var(--brown-color);
     text-decoration: none;
-    background: white;
+    background: var(--white-color);
 }
 

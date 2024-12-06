@@ -1,0 +1,177 @@
+html{
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;    
+    border: none;
+}
+
+.barra-lateral{
+    height: 100vh;
+    position: sticky;
+    font-size: 2rem;
+}
+
+.barra-lateral p{
+    padding-left: 15px;
+}
+
+.barra-lateral a{
+    height: 40px;
+    color: black;
+    transition: ease-in-out 200ms all;
+}
+
+.barra-lateral a:hover{
+    color: black;
+    text-decoration: none;
+
+    transform: scale(1.02);
+}
+
+
+.barra-lateral a > img{
+    height: 31px;
+}
+
+
+#pfp_usuario{
+    height: 40px;
+    border-radius: 100px;
+}
+
+.logo {
+    width: 180px;
+    margin-bottom: 40%;
+}
+
+.btn-laranja {
+    height: 45px;
+    font-size: 2rem;
+    color: var(--white-color);
+    display: block;
+    background: linear-gradient(30deg, var(--orange-color), var(--orange-dark));
+    padding: 8px;
+    border-radius: 30px;
+    transition: all 200ms ease-in-out;
+}
+
+.btn-laranja:hover{
+    color: var(--white-color);
+    text-decoration: none;
+    transform: scale(1.05);
+}
+
+.btn-laranja:focus{
+    outline: none;
+}
+
+
+
+.btn-laranja-redondo {
+    height: 45px;
+    background: linear-gradient(30deg, var(--orange-color), var(--orange-dark));
+    padding: 8px;
+    border-radius: 80px;
+    transition: all 200ms ease-in-out;
+}
+
+.btn-laranja-redondo:hover{
+    color: var(--white-color);
+    text-decoration: none;
+    transform: scale(1.05);
+}
+
+.btn-laranja-redondo:focus{
+    outline: none;
+}
+
+.pfp-pic{
+    height: 40px;
+    border-radius: 50px;
+}
+
+.username{
+    font-size: 1.6rem;
+}
+
+.icon-btn{
+    height: 30px;
+}
+
+.chat-main{
+    height: 100vh;
+    background: linear-gradient(90deg, var(--light-yellow-color), var(--light-orange-color));
+}
+
+
+.barra-mensagem {
+    padding-bottom: 40px;
+}
+
+.barra-mensagem button {
+    background-color: transparent;
+    border: 3px solid var(--white-color);
+    border-radius: 30px;
+    padding:5px;
+    
+    transition: 200ms all ease-in-out;
+}
+
+.barra-mensagem button:hover {
+    transform: scale(1.1);
+}
+
+.barra-mensagem button:focus {
+    outline: none;
+}
+
+
+.barra-mensagem a {
+    background-color: transparent;
+    border: 3px solid var(--white-color);
+    border-radius: 30px;
+    padding:5px;
+    
+    transition: 200ms all ease-in-out;
+}
+
+.barra-mensagem a:hover {
+    transform: scale(1.1);
+    text-decoration: none;
+}
+
+#input_mensagem{
+    min-width: none;
+    width: 70vw;
+    padding-block: 10px ;
+    padding-inline: 25px;
+    font-size: 2rem;
+    border-radius: 100px;
+}
+
+#input_mensagem:focus{
+    outline-color: gray;
+}
+
+.barra-topo {
+    height: 15%;
+    border-radius: 15px;
+}
+
+.connect-info {
+    font-size: 2.3rem;
+}
+
+.img-connect {
+    height: 55px;
+}
+
+.chat{
+    min-height: 70vh;
+    height: 70vh;
+    overflow-y: auto; 
+    overflow-x: hidden; 
+}
