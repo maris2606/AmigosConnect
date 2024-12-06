@@ -48,13 +48,13 @@ html{
 }
 
 
-.feed{
+.main{
     min-height: 100vh;
     position: static;
 }
 
 .feed-main{
-    background: linear-gradient(90deg, #F0C674, #F38D44);
+    background: linear-gradient(90deg, var(--light-yellow-color), var(--light-orange-color));
 }
 
 .barra-topo {
@@ -66,6 +66,10 @@ html{
     padding-inline: 25px;
     font-size: 2rem;
     border-radius: 100px;
+}
+
+.pesquisa:focus{
+    outline-color: gray;
 }
 
 .btn-pesquisa{
@@ -91,20 +95,47 @@ html{
 }
 
 
-.btn-criar-connect {
+
+
+.btn-laranja {
     font-size: 2rem;
-    color: white;
+    color: var(--white-color);
     display: block;
-    background: linear-gradient(30deg,#FF5C00, #993700);
+    background: linear-gradient(30deg, var(--orange-color), var(--orange-dark));
     padding: 10px;
     border-radius: 30px;
     transition: all 200ms ease-in-out;
 }
 
-.btn-criar-connect:hover{
-    color: white;
+.btn-laranja:hover{
+    color: var(--white-color);
     text-decoration: none;
     transform: scale(1.05);
+}
+
+.btn-laranja:focus{
+    outline: none;
+}
+
+.btn-laranja-outline {
+    background-color: var(--white-color);
+    font-size: 2rem;
+    color: var(--orange-color);
+    display: block;
+    border: 3px solid var(--orange-color);
+    padding: 10px;
+    border-radius: 30px;
+    transition: all 200ms ease-in-out;
+}
+
+.btn-laranja-outline:hover{
+    color: var(--white-color);
+    background-color: var(--orange-color);
+    transform: scale(1.05);
+}
+
+.btn-laranja-outline:focus{
+    outline: none;
 }
 
 .pfp-pic{
@@ -135,12 +166,18 @@ html{
 }
 
 .btn-post{
-    background: white;
+    background: var(--white-color);
     font-size: 1.5rem;
+
+    transition: all 200ms ease-in-out;
 }
 
 .btn-post:focus{
     outline: none;
+}
+
+.btn-post:hover{
+    transform: scale(1.08);
 }
 
 .media-post{
@@ -155,9 +192,114 @@ html{
 
 .btn-mais {
     height: 30px;
-    background: white;
+    background: var(--white-color);
 }
 
 .btn-mais:focus{
     outline: none;
 }
+
+.btn-mais:hover{
+    transform: scale(1.08);
+}
+
+
+.heart-button-v {
+    transition: all ease-in-out 300ms;
+    
+}
+
+.heart-button-p {
+    transition: all ease-in-out 300ms;
+    transform: rotate(720deg);
+}
+
+.btn-denuncia{
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1.8rem;
+    background-color: var(--white-color);
+    transition: 200ms all ease-in-out;
+}
+
+.btn-denuncia:focus{
+    outline: none;
+}
+
+.btn-denuncia:hover{
+    background-color: var(--gray-color);
+}
+
+label {
+    font-size: 1.8rem;
+}
+
+.input-text {
+    font-size: 1.8rem;
+    height: 50px;
+    border-radius: 9px;
+    background-color: var(--gray-color);
+    margin-bottom: 15px;
+    padding-inline: 20px;
+}
+
+.desc-post{
+    font-size: 1.4rem;
+}
+
+
+/*----------------------------------*/
+
+.criar-connect-main{
+    padding-block: 30px;
+    background: linear-gradient(90deg, var(--light-yellow-color), var(--light-orange-color));
+}
+
+.card-criar-connect{
+    padding: 30px 80px !important;
+    min-height: 90%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+.input-image{
+    display: none;
+}
+
+.custom-file-button {
+    display: inline-block;
+    padding: 5px 20px;
+    background-color: var(--more-light-orange-color); /* Cor do botão */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+.custom-file-button:hover {
+    background-color: var(--light-orange-color); /* Cor ao passar o mouse */
+}
+
+#amigos_select {
+    height: max-content;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+}
+
+.amg {
+    gap: 5px;
+    background-color: var(--more-light-yellow-color);
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 1.7rem;
+}
+
+.amigos-selecionados{
+    min-height: 30vh;
+    padding-bottom: 20px;
+    gap: 10px;
+}
+
