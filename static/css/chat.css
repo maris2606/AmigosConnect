@@ -212,3 +212,49 @@ html{
     width: 100%;
     justify-content: end;
 }
+
+
+
+
+.enquete-container {
+    background-color: var(--more-light-yellow-color);
+    border-radius: 15px;
+    padding: 20px;
+    width: 50%;
+    max-width: 55%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.enquete-titulo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background-color: var(--medium-yellow-color);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    color: var(--black-color);
+}
+
+.opcao {
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.opcao-nome {
+    margin-bottom: 5px;
+    color: var(--black-color);
+}
+.barra {
+    background-color: #fff;
+    height: 8px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.barra-preenchida {
+    background-color: #f8aa35;
+    height: 100%;
+    transition: width 0.3s ease-in-out;
+}
