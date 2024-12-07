@@ -258,3 +258,53 @@ html{
     height: 100%;
     transition: width 0.3s ease-in-out;
 }
+
+.card-chat{
+    width: 60%;
+    height: 100%; 
+    min-height: min-content !important;
+    border-radius: 15px;
+}
+
+.lista{
+    font-size: 2rem;
+}
+
+.img-connect{
+    height: 100px;
+    width: 100px;
+    border-radius: 200px;
+}
+
+.alterar-img{
+    font-size: 1.5rem;
+}
+
+.main {
+    min-height: 100vh;
+}
+
+.chat-main-info-participantes{
+    min-height: min-content !important;
+    background: linear-gradient(90deg, var(--light-yellow-color), var(--light-orange-color));
+}
+
+.custom-file-button {
+    display: inline-block;
+    padding: 5px 20px;
+    background-color: var(--more-light-orange-color); /* Cor do botão */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+.custom-file-button:hover {
+    background-color: var(--light-orange-color); /* Cor ao passar o mouse */
+}
+
+.input-image{
+    display: none;
+}
