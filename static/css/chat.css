@@ -20,12 +20,12 @@ html{
 
 .barra-lateral a{
     height: 40px;
-    color: black;
+    color: var(--black-color);
     transition: ease-in-out 200ms all;
 }
 
 .barra-lateral a:hover{
-    color: black;
+    color: var(--black-color);
     text-decoration: none;
 
     transform: scale(1.02);
@@ -68,7 +68,26 @@ html{
     outline: none;
 }
 
+.btn-laranja-outline {
+    background-color: var(--white-color);
+    font-size: 2rem;
+    color: var(--orange-color);
+    display: block;
+    border: 3px solid var(--orange-color);
+    padding: 6px;
+    border-radius: 30px;
+    transition: all 200ms ease-in-out;
+}
 
+.btn-laranja-outline:hover{
+    color: var(--white-color);
+    background-color: var(--orange-color);
+    transform: scale(1.05);
+}
+
+.btn-laranja-outline:focus{
+    outline: none;
+}
 
 .btn-laranja-redondo {
     height: 45px;
@@ -93,6 +112,11 @@ html{
     border-radius: 50px;
 }
 
+.pfp-pic-msg{
+    height: 30px;
+    border-radius: 50px;
+}
+
 .username{
     font-size: 1.6rem;
 }
@@ -108,6 +132,8 @@ html{
 
 
 .barra-mensagem {
+    
+    padding-top: 10px;
     padding-bottom: 40px;
 }
 
@@ -153,10 +179,11 @@ html{
 }
 
 #input_mensagem:focus{
-    outline-color: gray;
+    outline-color: var(--gray-color);
 }
 
 .barra-topo {
+    width: 97%;
     height: 15%;
     border-radius: 15px;
 }
@@ -170,8 +197,188 @@ html{
 }
 
 .chat{
-    min-height: 70vh;
-    height: 70vh;
+    width: 97%;
+    padding-block: 15px;
+    height: 75vh;
     overflow-y: auto; 
     overflow-x: hidden; 
+}
+
+.mensagem {
+    width: max-content;
+    max-width: 55%;
+    border-radius: 5px;
+    font-size: 2rem;
+    background-color: var(--more-light-yellow-color);
+}
+
+.user-msg {
+    font-weight: 600;
+}
+
+.hora-msg{
+    font-size: 1.5rem;
+}
+
+.recebida{
+    height: min-content;
+    width: 100%;
+    justify-content: start;
+}
+
+.enviada{
+    height: min-content;
+    width: 100%;
+    justify-content: end;
+}
+
+
+
+
+.enquete-container {
+    background-color: var(--more-light-yellow-color);
+    border-radius: 15px;
+    padding: 20px;
+    width: 50%;
+    max-width: 55%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.enquete-titulo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background-color: var(--medium-yellow-color);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    color: var(--black-color);
+}
+
+.opcao {
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.opcao-nome {
+    margin-bottom: 5px;
+    color: var(--black-color);
+}
+.barra {
+    background-color: var(--white-color);
+    height: 8px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.barra-preenchida {
+    background-color: var(--vibrant-yellow-color);
+    height: 100%;
+    transition: width 0.3s ease-in-out;
+}
+
+.card-chat{
+    width: 60%;
+    height: 100%; 
+    min-height: min-content !important;
+    border-radius: 15px;
+}
+
+.lista{
+    font-size: 2rem;
+}
+
+.img-connect{
+    height: 100px;
+    width: 100px;
+    border-radius: 200px;
+}
+
+.alterar-img{
+    font-size: 1.5rem;
+}
+
+.main {
+    min-height: 100vh;
+}
+
+.chat-main-info-participantes{
+    min-height: min-content !important;
+    background: linear-gradient(90deg, var(--light-yellow-color), var(--light-orange-color));
+}
+
+.custom-file-button {
+    display: inline-block;
+    padding: 5px 20px;
+    background-color: var(--more-light-orange-color); /* Cor do botão */
+    color: var(--white-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.custom-file-button:hover {
+    background-color: var(--light-orange-color); /* Cor ao passar o mouse */
+}
+
+.input-image{
+    display: none;
+}
+
+
+.btn-popover {
+    background-color: var(--white-color);
+    font-size: 2rem;
+
+    transition: all ease-in-out 200ms;
+}
+
+.btn-popover:focus{
+    outline: none;
+}
+
+.btn-popover:hover{
+    transform: scale(1.05);
+}
+
+
+#enquete, #midia {
+    border-radius: 5px;
+    font-size: 2.4rem;
+}
+
+#enquete input{
+    font-size: 1.8rem;
+    padding: 10px 15px;
+
+    background: var(--gray-color);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#midia select {
+    padding: 5px;
+    font-size: 1.8rem;
+}
+
+.btn-add-alternativa {
+    display: inline-block;
+    padding: 5px 20px;
+    background-color: var(--more-light-orange-color); /* Cor do botão */
+    color: var(--white-color);
+    border: none;
+    font-size: 1.6rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn-add-alternativa:hover{
+    background-color: var(--light-orange-color);
+}
+
+.btn-add-alternativa:focus {
+    outline: none;
 }

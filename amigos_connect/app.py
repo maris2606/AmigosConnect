@@ -25,6 +25,26 @@ def login():
 def cadastro(): 
     return render_template("cadastro.html")
 
+@app.route("/criar-connect.html")
+def cria_connect(): 
+    return render_template("/criar-connect.html")
+
+@app.route("/criar-connect.html", methods = ['POST'])
+def criar_connect(): 
+    return render_template("/criar-connect.html")
+
+@app.route("/info-connect.html")
+def info_connect(): 
+    return render_template("info-connect.html")
+
+@app.route("/participantes.html")
+def mostrar_participantes(): 
+    return render_template("participantes.html")
+
+@app.route("/chat.html")
+def mostrar_chat(): 
+    return render_template("chat.html")
+
 @app.route("/feed.html")
 def feed():
     # Verifica se o usuário está logado
