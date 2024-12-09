@@ -20,12 +20,12 @@ html{
 
 .barra-lateral a{
     height: 40px;
-    color: black;
+    color: var(--black-color);
     transition: ease-in-out 200ms all;
 }
 
 .barra-lateral a:hover{
-    color: black;
+    color: var(--black-color);
     text-decoration: none;
 
     transform: scale(1.02);
@@ -68,7 +68,26 @@ html{
     outline: none;
 }
 
+.btn-laranja-outline {
+    background-color: var(--white-color);
+    font-size: 2rem;
+    color: var(--orange-color);
+    display: block;
+    border: 3px solid var(--orange-color);
+    padding: 6px;
+    border-radius: 30px;
+    transition: all 200ms ease-in-out;
+}
 
+.btn-laranja-outline:hover{
+    color: var(--white-color);
+    background-color: var(--orange-color);
+    transform: scale(1.05);
+}
+
+.btn-laranja-outline:focus{
+    outline: none;
+}
 
 .btn-laranja-redondo {
     height: 45px;
@@ -160,7 +179,7 @@ html{
 }
 
 #input_mensagem:focus{
-    outline-color: gray;
+    outline-color: var(--gray-color);
 }
 
 .barra-topo {
@@ -246,7 +265,7 @@ html{
     color: var(--black-color);
 }
 .barra {
-    background-color: #fff;
+    background-color: var(--white-color);
     height: 8px;
     border-radius: 10px;
     position: relative;
@@ -254,7 +273,7 @@ html{
 }
 
 .barra-preenchida {
-    background-color: #f8aa35;
+    background-color: var(--vibrant-yellow-color);
     height: 100%;
     transition: width 0.3s ease-in-out;
 }
@@ -293,11 +312,11 @@ html{
     display: inline-block;
     padding: 5px 20px;
     background-color: var(--more-light-orange-color); /* Cor do botão */
-    color: white;
+    color: var(--white-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.6rem;
     text-align: center;
 }
 
@@ -307,4 +326,59 @@ html{
 
 .input-image{
     display: none;
+}
+
+
+.btn-popover {
+    background-color: var(--white-color);
+    font-size: 2rem;
+
+    transition: all ease-in-out 200ms;
+}
+
+.btn-popover:focus{
+    outline: none;
+}
+
+.btn-popover:hover{
+    transform: scale(1.05);
+}
+
+
+#enquete, #midia {
+    border-radius: 5px;
+    font-size: 2.4rem;
+}
+
+#enquete input{
+    font-size: 1.8rem;
+    padding: 10px 15px;
+
+    background: var(--gray-color);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#midia select {
+    padding: 5px;
+    font-size: 1.8rem;
+}
+
+.btn-add-alternativa {
+    display: inline-block;
+    padding: 5px 20px;
+    background-color: var(--more-light-orange-color); /* Cor do botão */
+    color: var(--white-color);
+    border: none;
+    font-size: 1.6rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn-add-alternativa:hover{
+    background-color: var(--light-orange-color);
+}
+
+.btn-add-alternativa:focus {
+    outline: none;
 }

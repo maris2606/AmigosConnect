@@ -111,7 +111,7 @@
                         
                         <div class="opcao">
                             <span class="d-flex">
-                                <input type="radio" name="opt" class="voto" data-nome="Bienal do Livro" id="bienal-do-livro">
+                                <input type="radio" name="opt" class="voto" data-nome="Bienal do Livro" id="bienal">
                                 <label class="pl-3" for="bienal">Bienal do Livro</label>
                             </span>
                             <div class="barra">
@@ -207,9 +207,26 @@
             <div class="row barra-mensagem w-100  d-flex justify-content-center align-items-end">
                 <form class="d-flex justify-content-center align-items-center " action="" method="post">
 
-                    <a class="btn-barra-msg mr-3">
+                    <button type="button" class="btn-barra-msg mr-3" data-toggle="popover" data-content='
+                        <div class="p-3 d-flex flex-column justify-content-start align-items-start">
+                            <button data-toggle="modal" data-target="#calendario" class="btn-popover d-flex justify-content-between align-items-center p-3" type="button">
+                                <img class="icon-btn pr-3" src="/static/icons/calendario.svg" alt="icone de calendario">
+                                calendário
+                            </button>
+
+                            <button data-toggle="modal" data-target="#enquete" class="btn-popover d-flex justify-content-between align-items-center p-3" type="button">
+                                <img class="icon-btn pr-3" src="/static/icons/enquete.svg" alt="icone de enquete">
+                                enquete
+                            </button>
+
+                            <button data-toggle="modal" data-target="#midia" class="btn-popover d-flex justify-content-between align-items-center p-3" type="button">
+                                <img class="icon-btn pr-3" src="/static/icons/attach_file.svg" alt="icone de adicionar mídia">
+                                mídia
+                            </button>
+                        </div>
+                        '>
                         <img class="icon-btn" src="/static/icons/addb.svg" alt="icone de mais opções">
-                    </a>
+                    </button>
 
                     <input class="mr-3" type="text" name="input-mensagem" id="input_mensagem" alt="icone de enviar">
 
@@ -222,11 +239,132 @@
         </div>
     </div>
 
+    <!-- Modal criar enquete -->
+    <div class="modal fade" id="enquete" tabindex="-1" role="dialog" aria-labelledby="modal de criar enquete" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header p-4">
+                    <h1 class="modal-title" id="titulo_modal_enquete">Criar enquete</h1>
+                    <button type="button" class="close close-enquete" data-dismiss="modal" aria-label="Close">
+                        <span style="font-size: 3rem;" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="" method="post" class="p-5 modal-body d-flex flex-column align-items-start justify-content-center">
+                  
+                        <label class="mt-3" for="nome">Nome da enquete:</label>
+                        <input class="input-text w-100" type="text" name="nome" id="nome" placeholder="Digite o que será votado">
+                    
+                        <div class="alternativas-adicionadas w-100">
+                            <!-- aqui precisa colocar o id da enquete tá -->
+                            <span class="d-flex justify-content-between w-100">
+                                <label class="mt-3" for="enquete_a1">Alternativa 1:</label>
+                                <input type="text" name="alternativa-1" id="enquete_a1">
+                            </span>
+
+                            <span class="d-flex justify-content-between w-100">
+                                <label class="mt-3" for="enquete_a2">Alternativa 2:</label>
+                                <input type="text" name="alternativa-2" id="enquete_a2">
+                            </span>
+                        </div>
+
+                        <button class="btn-add-alternativa" type="button">adicionar alternativa</button>
+
+
+                </form>
+
+                <div class="modal-footer p-3">
+                    <button type="button" class="px-5 btn-laranja-outline cancelar-enquete" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="px-5 btn-laranja">Criar enquete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal adicionar midia -->
+    <div class="modal fade" id="midia" tabindex="-1" role="dialog" aria-labelledby="modal de adicionar midia" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="titulo_modal_midia">Adicionar mídia</h1>
+                    <button type="button" class="close close-midia" data-dismiss="modal" aria-label="Close">
+                        <span style="font-size: 3rem;" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="" method="post" class="modal-body d-flex flex-column align-items-start justify-content-center">
+
+                    <label for="tipo_midia">Selecione o tipo de mídia</label>
+                    <select name="tipo-midia" id="tipo_midia">
+                        <option value="foto">foto</option>
+                        <option value="video">vídeo</option>
+                        <option value="gif">gif</option>
+                    </select>
+                  
+                    <label class="mt-3 w-50">Arquivo de mídia:</label>
+                            
+                    <label for="arquivo_chat" class="w-100 custom-file-button">Escolher arquivo</label>
+                    <input class="input-image w-100" type="file" accept="*/*" name="arquivo-chat" id="arquivo_chat">
+                </form>
+
+                <div class="modal-footer p-3">
+                    <button type="button" class="px-5 btn-laranja-outline cancelar" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="px-5 btn-laranja">Enviar mídia</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal ver calendario -->
+    <div class="modal fade" id="calendario" tabindex="-1" role="dialog" aria-labelledby="modal de ver calendario" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header p-4">
+                    <h1 class="modal-title" id="titulo_modal_calendario">Ver calendario</h1>
+                    <button type="button" class="close close-calendario" data-dismiss="modal" aria-label="Close">
+                        <span style="font-size: 3rem;" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="" method="post" class="p-5 modal-body d-flex flex-column align-items-start justify-content-center">
+                
+                        
+                   
+                </form>
+
+                <div class="modal-footer p-3">
+                    <button type="button" class="px-5 btn-laranja-outline cancelar-enquete" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="px-5 btn-laranja">Criar enquete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <script src="/static/js/chat.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    <script>
+        $(function () {
+          $('.btn-barra-msg').popover({
+            container: 'body',
+            html:true
+          });
+        });
+
+        $('#enquete').on('shown.bs.modal', function () {
+            $('[data-toggle="popover"]').popover('hide');
+            $('#enquete').stopPropagation();
+        })
+
+        $('#midia').on('shown.bs.modal', function () {
+            $('[data-toggle="popover"]').popover('hide');
+            $('#midia').stopPropagation();
+        })
+    </script>
 </body>
 </html>
