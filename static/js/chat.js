@@ -11,6 +11,15 @@ const area_alternativas = document.querySelector('.alternativas-adicionadas');
 const btn_cancelar_enquete =  document.querySelector('.cancelar-enquete');
 const btn_close_enquete =  document.querySelector('.close-enquete');
 
+const btn_add_data = document.querySelector('.btn-add-data');
+
+btn_add_data.addEventListener("click", ()=>{
+    let selected = document.querySelector('.rd-day-selected');
+    selected.classList.add('indisponivel');
+});
+
+
+
 // rola pra mensagem mais recente
 chat.scrollTop = chat.scrollHeight;
 
