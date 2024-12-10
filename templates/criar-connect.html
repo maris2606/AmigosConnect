@@ -19,7 +19,7 @@
 
                 <a href="" class="row d-flex justify-content-start align-items-center">
                     <img id="pfp_usuario" src="/static/icons/Generic avatar.svg" alt="foto do usuário">
-                    <p>@JossanaT</p>
+                    <p>@{{usuario.nomeUsuario}}</p>
                 </a>
             </div>
 
@@ -55,7 +55,7 @@
                 <div class="col-8 card-criar-connect bg-white">
                     <h1 class="row text-center py-4 d-flex justify-content-center">Criar connect</h1>
 
-                    <form class="row d-flex flex-column justify-content-around" action="" method="post">
+                    <form class="row d-flex flex-column justify-content-around" action="/criar-connect.html" method="post" enctype="multipart/form-data" >
                         <label class="mt-3" for="nome-connect">Nome do connect:</label>
                         <input class="input-text w-100" type="text" name="nome-connect" id="nome_connect" placeholder="Digite o nome do connect">
                     
@@ -70,17 +70,11 @@
                             <label id="label-selecionar" for="amigos_select">Adicionar amigos</label>
                             <select class="form-control" id="amigos_select">
                                 <option id="default_select" value="0">Selecionar amigos</option>
-                                <option value="@joaomontlix">@joaomontlix</option>
-                                <option value="@tjossana">@tjossana</option>
-                                <option value="@maris2606">@maris2606</option>
-                                <option value="@mihcup">@mihcup</option>
-
-                                <!--maris -- nota: não esqueçam de mudar o value. ele qm é mais importante pra considerar 
-                                como opções diferentes -->
-                                <option value="@joaomontlix1">@joaomontlix2</option>
-                                <option value="@tjossana1">@tjossana2</option>
-                                <option value="@maris26061">@maris26062</option>
-                                <option value="@mihcup1">@mihcup2</option>
+                                {% for u in usuarios %}
+                                    {% if u.idUsuario != usuario.idUsuario %}
+                                        <option value=@{{u.nomeUsuario}}>@ {{u.nomeUsuario}} </option> 
+                                    {% endif %}
+                                {% endfor %}                               
                             </select>
                         </div>
                     
