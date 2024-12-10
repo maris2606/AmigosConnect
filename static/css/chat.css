@@ -382,3 +382,30 @@ html{
 .btn-add-alternativa:focus {
     outline: none;
 }
+
+.btn-add-data {
+    margin-top: 30px;
+    display: inline-block;
+    padding: 5px 20px;
+    background-color: var(--more-light-orange-color); /* Cor do botão */
+    color: var(--white-color);
+    border: none;
+    font-size: 1.6rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn-add-data:hover{
+    background-color: var(--light-orange-color);
+}
+
+.btn-add-data:focus {
+    outline: none;
+}
+
+
+.indisponivel {
+    background-color: rgba(248, 169, 0, .5) !important;
+    border-radius: 30px;
+    color: white;
+}
