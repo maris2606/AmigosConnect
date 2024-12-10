@@ -19,7 +19,7 @@
 
                 <a href="" class="row d-flex justify-content-start align-items-center">
                     <img id="pfp_usuario" src="/static/icons/Generic avatar.svg" alt="foto do usuário">
-                    <p>@JossanaT</p>
+                    <p>@ {{usuario.nomeUsuario}} </p>
                 </a>
             </div>
 
@@ -59,59 +59,15 @@
                     </div>
                 
                     <ul class="row w-100 px-5 list-group lista">
+                        {% for participante in participantes %}
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>@JossanaT</p>
-                            <p>adm</p>
-                        </li> <!--  poderia colocar o botao remover aqui pro adm--> 
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>@joao</p> 
-                            <p>membro</p>
+                            <p>@ {{participante}} </p>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>@maris</p> 
-                            <p>membro</p>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>@mih</p>
-                            <p>membro</p>
-                        </li>
-
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>@JossanaT</p>
-                            <p>adm</p>
-                        </li> <!--  poderia colocar o botao remover aqui pro adm--> 
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>@joao</p> 
-                            <p>membro</p>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>@maris</p> 
-                            <p>membro</p>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>@mih</p>
-                            <p>membro</p>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>@JossanaT</p>
-                            <p>adm</p>
-                        </li> <!--  poderia colocar o botao remover aqui pro adm--> 
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>@joao</p> 
-                            <p>membro</p>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>@maris</p> 
-                            <p>membro</p>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>@mih</p>
-                            <p>membro</p>
-                        </li>
+                        {% endfor %}
                     </ul>
 
                     <div class="row w-100 p-5 d-flex justify-content-center w-75">
-                        <a class="btn-laranja text-center w-100" href="/templates/chat.html">voltar</a>
+                        <a class="btn-laranja text-center w-100" href="/chat.html">voltar</a>
                     </div>                
                 </div>
             </div>

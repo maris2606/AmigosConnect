@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from datetime import datetime
 from conexao import conexao_fechar, conexao_abrir
-from arquivo import obter_usuario, salvar_usuario, salvar_connect
+from arquivo import obter_usuario, salvar_usuario, salvar_connect, obter_id_usuario_por_nome,salvar_participantes_connect,obter_connect_pelo_id, obter_nomes_usuarios_do_connect, obter_mensagens_do_connect
 import sys
 import os
 
@@ -29,7 +29,7 @@ def cadastro():
 
 @app.route("/criar-connect.html")
 def cria_connect(): 
-    return render_template("/criar-connect.html", usuario = session['usuario'], usuarios = obter_usuario(con))
+    return render_template("/criar-connect.html", usuario = session['usuario'], usuarios = obter_usuario(con), connect = obter_connect_pelo_id(con,14))
 
 @app.route("/info-connect.html")
 def info_connect(): 
@@ -41,14 +41,13 @@ def mostrar_participantes():
 
 @app.route("/chat.html")
 def mostrar_chat(): 
-    return render_template("chat.html", usuario = session['usuario'])
+    return render_template("chat.html", usuario = session['usuario'], connect = obter_connect_pelo_id(con,14), mensagens = obter_mensagens_do_connect(con, 14))
 
 @app.route("/feed.html")
 def feed():
-    # Verifica se o usuário está logado
     if 'usuario' not in session:
         return redirect(url_for('login'))
-    return render_template("feed.html")
+    return render_template("feed.html", usuario = session['usuario'],connect = obter_connect_pelo_id(con,14))
 
 @app.route("/politicas.html")
 def politicas():
@@ -57,6 +56,10 @@ def politicas():
 @app.route("/termos.html")
 def termos():
     return render_template("termos.html")
+
+@app.route("/templates/participantes.html")
+def participantes():
+    return render_template("participantes.html", usuario = session['usuario'], participantes = obter_nomes_usuarios_do_connect(con,14))
 
 @app.route("/cadastro.html", methods=['POST'])
 def cadastrar():
@@ -98,17 +101,34 @@ def entrar():
     else: 
         return render_template("login.html")
 
-@app.route("/criar-connect.html", methods = ['POST'])
-def criar_connect(): 
+@app.route("/criar-connect.html", methods=['POST'])
+def criar_connect():
     nome_connect = request.form['nome-connect'].strip()
     print(nome_connect)
+    
+    amigos = request.form['amigos_selecionados'].split(',')
+    amigos = [amigo.replace('@', '').strip() for amigo in amigos]
+    print(f"Amigos selecionados: {amigos}")
+    id_participantes_connect = []
+    
+    for amigo in amigos:
+        id_participante = obter_id_usuario_por_nome(con,amigo)
+        if (id_participante is not None) and (type(id_participante) == int): 
+            id_participantes_connect.append(id_participante)
+    
+    id_participantes_connect.append(session['usuario']['idUsuario'])
+    print(f"ids: {id_participantes_connect}")
+    
     foto = request.files['foto-connect']
     foto_conteudo = foto.read()
-    #amigos_select = request.form.getlist('amigos_select')
-    connect = Connect(None,nome_connect,foto_conteudo,None)
-    salvar_connect(con,connect)
-    return render_template("/chat.html", usuario = session['usuario'])
-
+    
+    connect = Connect(None, nome_connect, foto_conteudo, None)
+    salvar_connect(con, connect)
+    for id_p in id_participantes_connect:
+        if type(id_p) == int:
+            salvar_participantes_connect(con,id_p) 
+     
+    return render_template("/chat.html", usuario=session['usuario'], connect = obter_connect_pelo_id(con,14))
 conexao_fechar(con)
 
 app.run(debug=True)
