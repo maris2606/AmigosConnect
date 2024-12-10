@@ -126,3 +126,25 @@ def obter_nomes_usuarios_do_connect(con, id_connect):
         nomes_usuarios.append(registro['nomeUsuario'])  
 
     return nomes_usuarios
+
+def obter_mensagens_do_connect(con, id_connect):
+    cursor = con.cursor(dictionary=True)  
+    sql = """
+        SELECT M.idMensagem, M.textoMensagem, M.dataEnvio, U.nomeUsuario
+        FROM Mensagem M
+        JOIN Usuario U ON M.fk_Usuario_idUsuario = U.idUsuario
+        WHERE M.fk_Connect_idConnect = %s
+        ORDER BY M.dataEnvio
+    """
+    cursor.execute(sql, (id_connect,))  
+    mensagens = []
+
+    for registro in cursor:
+        mensagens.append({
+            'idMensagem': registro['idMensagem'],
+            'textoMensagem': registro['textoMensagem'],
+            'dataEnvio': registro['dataEnvio'],
+            'nomeUsuario': registro['nomeUsuario']
+        })
+
+    return mensagens

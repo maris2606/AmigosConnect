@@ -25,7 +25,7 @@
 
                 <a href="" class="row d-flex justify-content-start align-items-center">
                     <img id="pfp_usuario" src="/static/icons/Generic avatar.svg" alt="foto do usuário">
-                    <p>@{{usuario.nomeUsuario}}</p>
+                    <p id="nome_usuario">@{{usuario.nomeUsuario}}</p>
                 </a>
             </div>
 
@@ -76,138 +76,24 @@
             </div>
 
             <div class="row chat">
-                
-                <div class="recebida p-3 d-flex">
-                    <div class="mensagem p-3">
-                        <div class="row w-100 m-0">
-                            <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
-                            <p class="user-msg">jossaninha</p>
-                        </div>
-    
-                        <div class="row w-100 m-0 conteudo">
-                            <p>Bom dia povo! onde vamos nos encontrar?</p>
-                        </div>
-    
-                        <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
-                            <p class="m-0">16:04</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="recebida p-3 d-flex">
-                    <div class="mensagem p-3">
-                        <div class="row w-100 m-0">
-                            <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
-                            <p class="user-msg">jossaninha</p>
-                        </div>
-    
-                        <div class="row w-100 m-0 conteudo">
-                            <p>Bom dia povo! onde vamos nos encontrar?</p>
-                        </div>
-    
-                        <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
-                            <p class="m-0">16:04</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="enviada p-3 d-flex">
-                    <form class="enquete-container" action="/chat.html" method="post">
-                        <p class="enquete-titulo">Onde vamos?</p>
-                        
-                        <div class="opcao">
-                            <span class="d-flex">
-                                <input type="radio" name="opt" class="voto" data-nome="Bienal do Livro" id="bienal">
-                                <label class="pl-3" for="bienal">Bienal do Livro</label>
-                            </span>
-                            <div class="barra">
-                                <div class="barra-preenchida" id="barra-bienal-do-livro"></div>
+                {% for mensagem in mensagens %}
+                    <div class="recebida p-3 d-flex">
+                        <div class="mensagem p-3">
+                            <div class="row w-100 m-0">
+                                <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
+                                <p class="user-msg">{{mensagem.nomeUsuario}}</p>
+                            </div>
+        
+                            <div class="row w-100 m-0 conteudo">
+                                <p> {{mensagem.textoMensagem}} </p>
+                            </div>
+        
+                            <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
+                                <p class="m-0">{{mensagem.dataEnvio}}</p>
                             </div>
                         </div>
-                    
-                        <div class="opcao">
-                            <span class="d-flex">
-                                <input type="radio" name="opt" class="voto" data-nome="Ibirapuera" id="ibirapuera">
-                                <label class="pl-3" for="ibirapuera">Ibirapuera</label>
-                            </span>
-                            <div class="barra">
-                                <div class="barra-preenchida" id="barra-ibirapuera"></div>
-                            </div>
-                        </div>
-                    
-                        <div class="opcao">
-                            <span class="d-flex">
-                                <input type="radio" name="opt" class="voto" data-nome="Paulista" id="paulista">
-                                <label class="pl-3" for="paulista">Av. Paulista</label>
-                            </span>
-                            <div class="barra">
-                                <div class="barra-preenchida" id="barra-paulista"></div>
-                            </div>
-                        </div>
-                    
-                        <div class="opcao">
-                            <span class="d-flex">
-                                <input type="radio" name="opt" class="voto" data-nome="Tucuruvi" id="tucuruvi">
-                                <label class="pl-3" for="tucuruvi">Shop. Tucuruvi</label>
-                            </span>
-                            <div class="barra">
-                                <div class="barra-preenchida" id="barra-tucuruvi"></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                
-
-                <div class="enviada p-3 d-flex">
-                    <div class="mensagem p-3">
-                        <div class="row w-100 m-0">
-                            <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
-                            <p class="user-msg">jossaninha</p>
-                        </div>
-    
-                        <div class="row w-100 m-0 conteudo">
-                            <p>Bom dia povo! onde vamos nos encontrar?</p>
-                        </div>
-    
-                        <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
-                            <p class="m-0">16:04</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="recebida p-3 d-flex">
-                    <div class="mensagem p-3">
-                        <div class="row w-100 m-0">
-                            <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
-                            <p class="user-msg">jossaninha</p>
-                        </div>
-    
-                        <div class="row w-100 m-0 conteudo">
-                            <p>Bom dia povo! onde vamos nos encontrar?</p>
-                        </div>
-    
-                        <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
-                            <p class="m-0">16:04</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="enviada p-3 d-flex">
-                    <div class="mensagem p-3">
-                        <div class="row w-100 m-0">
-                            <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
-                            <p class="user-msg">jossaninha</p>
-                        </div>
-    
-                        <div class="row w-100 m-0 conteudo">
-                            <p>Bom dia povo! onde vamos nos encontrar?</p>
-                        </div>
-    
-                        <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
-                            <p class="m-0">16:04</p>
-                        </div>
-                    </div>
-                </div>
+                    </div>  
+                {% endfor %}
             </div>
 
             <div class="row barra-mensagem w-100  d-flex justify-content-center align-items-end">

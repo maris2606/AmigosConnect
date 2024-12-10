@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from datetime import datetime
 from conexao import conexao_fechar, conexao_abrir
-from arquivo import obter_usuario, salvar_usuario, salvar_connect, obter_id_usuario_por_nome,salvar_participantes_connect,obter_connect_pelo_id, obter_nomes_usuarios_do_connect
+from arquivo import obter_usuario, salvar_usuario, salvar_connect, obter_id_usuario_por_nome,salvar_participantes_connect,obter_connect_pelo_id, obter_nomes_usuarios_do_connect, obter_mensagens_do_connect
 import sys
 import os
 
@@ -41,7 +41,7 @@ def mostrar_participantes():
 
 @app.route("/chat.html")
 def mostrar_chat(): 
-    return render_template("chat.html", usuario = session['usuario'], connect = obter_connect_pelo_id(con,14))
+    return render_template("chat.html", usuario = session['usuario'], connect = obter_connect_pelo_id(con,14), mensagens = obter_mensagens_do_connect(con, 14))
 
 @app.route("/feed.html")
 def feed():

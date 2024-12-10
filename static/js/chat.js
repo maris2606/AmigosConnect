@@ -1,5 +1,7 @@
 const mensagem = document.querySelector('#input_mensagem');
 
+const nome_usuario = document.querySelector('#nome_usuario');
+
 const btn = document.querySelector('#btn_enviar');
 
 const chat = document.querySelector('.chat');
@@ -25,15 +27,16 @@ chat.scrollTop = chat.scrollHeight;
 
 // provavelmente aqui nessa função viria algo semelhante pra enviar midia. mas a gnt pensa dps.
 // evento de enviar mensagem pro chat
-btn.addEventListener('click', ()=>{
+btn.addEventListener('click', () => {
     let msg = mensagem.value;
-    
+    let nome = nome_usuario ? nome_usuario.value : 'Usuário Desconhecido'; // Atribui o nome, ou "Usuário Desconhecido" caso não haja
+
     if (msg.trim() != '') {
         chat.innerHTML += `<div class="enviada p-3 d-flex">
                     <div class="mensagem p-3">
                         <div class="row w-100 m-0">
                             <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
-                            <p class="user-msg">jossaninha</p>
+                            <p class="user-msg">${nome}</p> 
                         </div>
     
                         <div class="row w-100 m-0 conteudo">
@@ -44,12 +47,13 @@ btn.addEventListener('click', ()=>{
                             <p class="m-0">16:04</p>
                         </div>
                     </div>
-                </div>`
+                </div>`;
         mensagem.value = '';
 
         chat.scrollTop = chat.scrollHeight;
     }
 });
+
 
 
 let n_alt = 2;
