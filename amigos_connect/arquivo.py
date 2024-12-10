@@ -29,3 +29,21 @@ def salvar_usuario(con, usuario):
     con.commit()
 
     cursor.close()
+
+def salvar_connect(con, connect):
+    cursor = con.cursor()
+
+    sql = 'INSERT INTO Connect (nomeConnect, fotoConnect) VALUES (%s, %s)'
+    
+    valores = (
+        connect.get_nome_connect(),
+        connect.get_foto_connect()
+    )
+
+    cursor.execute(sql, valores)
+
+
+
+    con.commit()
+
+    cursor.close()
