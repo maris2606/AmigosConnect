@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from datetime import datetime
 from conexao import conexao_fechar, conexao_abrir
-from arquivo import obter_usuario, salvar_usuario, salvar_connect
+from arquivo import obter_usuario, salvar_usuario, salvar_connect, obter_id_usuario_por_nome,salvar_participantes_connect
 import sys
 import os
 
@@ -98,16 +98,34 @@ def entrar():
     else: 
         return render_template("login.html")
 
-@app.route("/criar-connect.html", methods = ['POST'])
-def criar_connect(): 
+@app.route("/criar-connect.html", methods=['POST'])
+def criar_connect():
     nome_connect = request.form['nome-connect'].strip()
     print(nome_connect)
+    
+    amigos = request.form['amigos_selecionados'].split(',')
+    amigos = [amigo.replace('@', '').strip() for amigo in amigos]
+    print(f"Amigos selecionados: {amigos}")
+    id_participantes_connect = []
+    
+    for amigo in amigos:
+        id_participante = obter_id_usuario_por_nome(con,amigo)
+        if id_participante is not None: 
+            id_participantes_connect.append(id_participante)
+    id_participantes_connect.append(session['usuario']['idUsuario'])
+    print(f"ids: {id_participantes_connect}")
+    
     foto = request.files['foto-connect']
     foto_conteudo = foto.read()
-    #amigos_select = request.form.getlist('amigos_select')
-    connect = Connect(None,nome_connect,foto_conteudo,None)
-    salvar_connect(con,connect)
-    return render_template("/chat.html", usuario = session['usuario'])
+    
+    # Salvar no banco de dados
+    connect = Connect(None, nome_connect, foto_conteudo, None)
+    salvar_connect(con, connect)
+    for id_p in id_participantes_connect:
+        print(id_p)
+        salvar_participantes_connect(con,int(id_p))
+    
+    return render_template("/chat.html", usuario=session['usuario'])
 
 conexao_fechar(con)
 
