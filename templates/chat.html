@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <!-- calendar links -->
+    <link rel="stylesheet" href="/static/calendar/css/rome.css">
+
+
+    
     <link rel="stylesheet" href="/static/css/variaveis.css">
     <link rel="stylesheet" href="../static/css/chat.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 </head>    
 <body>
     
@@ -326,15 +332,25 @@
                     </button>
                 </div>
 
-                <form action="" method="post" class="p-5 modal-body d-flex flex-column align-items-start justify-content-center">
+                <div class="p-5 modal-body d-flex flex-column align-items-center justify-content-center">
                 
-                        
+                    <div class="row justify-content-center w-100">
+                        <div class="col text-center">
+                          <input type="text" class="form-control w-25 mx-auto mb-3" id="result" placeholder="Select date" disabled="">
+                            <form action="#" class="row">
+                                <div class="col-md-12">
+                                    <div id="inline_cal"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                    
-                </form>
+                    <button class="btn-add-data" type="button">adicionar data indiponível</button>
+                </div>
 
                 <div class="modal-footer p-3">
                     <button type="button" class="px-5 btn-laranja-outline cancelar-enquete" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="px-5 btn-laranja">Criar enquete</button>
+                    <button type="button" class="px-5 btn-laranja">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -348,6 +364,11 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    <!-- calendar js -->
+    <script src="/static/calendar/js/rome.js"></script>
+    <script src="/static/calendar/js/main.js"></script>
+
+    <!-- script pra ativar funções do bootstrap -->
     <script>
         $(function () {
           $('.btn-barra-msg').popover({
@@ -356,14 +377,19 @@
           });
         });
 
+        $('#calendario').on('shown.bs.modal', function () {
+            $('[data-toggle="popover"]').popover('hide');
+            
+        })
+
         $('#enquete').on('shown.bs.modal', function () {
             $('[data-toggle="popover"]').popover('hide');
-            $('#enquete').stopPropagation();
+            
         })
 
         $('#midia').on('shown.bs.modal', function () {
             $('[data-toggle="popover"]').popover('hide');
-            $('#midia').stopPropagation();
+            
         })
     </script>
 </body>
