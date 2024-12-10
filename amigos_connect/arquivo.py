@@ -39,7 +39,7 @@ def obter_id_usuario_por_nome(con, nome_usuario):
     usuario = cursor.fetchone()  
 
     if usuario:
-        return usuario['idUsuario']  
+        return usuario['idUsuario']
     else:
         return None  
 
@@ -65,17 +65,14 @@ def obter_ultimo_connect(con):
 
     ultimo_connect = cursor.fetchone()
 
-    return ultimo_connect
+    return ultimo_connect['idConnect']
 
 def salvar_participantes_connect(con, participante):
     cursor = con.cursor()
     id_connect = obter_ultimo_connect(con)
-
-
     sql = 'INSERT INTO Connect_Usuario (fk_Connect_idConnect, fk_Usuario_idUsuario) VALUES (%s, %s)'
-    valores = (id_connect, participante)
+    valores = (id_connect, participante,)
     cursor.execute(sql, valores)
 
-    con.commit()
-
     cursor.close()
+    con.commit()

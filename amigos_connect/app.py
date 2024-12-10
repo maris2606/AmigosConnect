@@ -110,21 +110,21 @@ def criar_connect():
     
     for amigo in amigos:
         id_participante = obter_id_usuario_por_nome(con,amigo)
-        if id_participante is not None: 
+        if (id_participante is not None) and (type(id_participante) == int): 
             id_participantes_connect.append(id_participante)
+    
     id_participantes_connect.append(session['usuario']['idUsuario'])
     print(f"ids: {id_participantes_connect}")
     
     foto = request.files['foto-connect']
     foto_conteudo = foto.read()
     
-    # Salvar no banco de dados
     connect = Connect(None, nome_connect, foto_conteudo, None)
     salvar_connect(con, connect)
     for id_p in id_participantes_connect:
-        print(id_p)
-        salvar_participantes_connect(con,int(id_p))
-    
+        if type(id_p) == int:
+            salvar_participantes_connect(con,id_p) #tá chegando inteiro aqui
+     
     return render_template("/chat.html", usuario=session['usuario'])
 
 conexao_fechar(con)
