@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meus Connects</title>
 
     <link rel="stylesheet" href="/static/css/variaveis.css">
     <link rel="stylesheet" href="../static/css/chat.css">
@@ -60,9 +60,11 @@
                 
                     <ul class="row w-100 px-5 list-group lista">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p>natal dedigados</p>
-                            <button type="button">entrar</button>
-                            <button data-toggle="modal" data-target="#confirmar_saida" class="btn-sair-connect" type="button">sair do connect</button>
+                            <p class="m-0 p-0">natal dedigados</p>
+                            <div class="botoes">
+                                <button class="btn-lista-entrar mr-3" type="button">entrar</button>
+                                <button class="btn-lista-sair" data-toggle="modal" data-target="#confirmar_saida" class="btn-sair-connect" type="button">sair do connect</button>
+                            </div>
                         </li>
                     </ul>
 
@@ -75,34 +77,25 @@
         </div>
     </div>
 
-    <div class="modal fade" id="confirmar_saida" tabindex="-1" role="dialog" aria-labelledby="modal de adicionar confirmar_saida" aria-hidden="true">
+    <div class="modal fade" id="confirmar_saida" tabindex="-1" role="dialog" aria-labelledby="modal de confirmar saida" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title" id="titulo_modal_confirmar_saida">Adicionar mídia</h1>
-                    <button type="button" class="close close-confirmar_saida" data-dismiss="modal" aria-label="Close">
+                    <h1 class="modal-title" id="titulo_modal_confirmar_saida">Sair do connect</h1>
+                    <button type="button" class="close close-confirmar-saida" data-dismiss="modal" aria-label="Close">
                         <span style="font-size: 3rem;" aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <form action="" method="post" class="modal-body d-flex flex-column align-items-start justify-content-center">
+                <div class="modal-body d-flex flex-column align-items-start justify-content-center">
 
-                    <label for="tipo_midia">Selecione o tipo de mídia</label>
-                    <select name="tipo-midia" id="tipo_midia">
-                        <option value="foto">foto</option>
-                        <option value="video">vídeo</option>
-                        <option value="gif">gif</option>
-                    </select>
-                  
-                    <label class="mt-3 w-50">Arquivo de mídia:</label>
-                            
-                    <label for="arquivo_chat" class="w-100 custom-file-button">Escolher arquivo</label>
-                    <input class="input-image w-100" type="file" accept="*/*" name="arquivo-chat" id="arquivo_chat">
-                </form>
+                    <h2 class="p-2" >Deseja mesmo sair do connect:</h2>
+                    <p class="nome-connect-modal p-5">'Connect Natal dedigados 2023' ?</p>
+                </div>
 
                 <div class="modal-footer p-3">
                     <button type="button" class="px-5 btn-laranja-outline cancelar" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="px-5 btn-laranja">Enviar mídia</button>
+                    <button type="button" class="px-5 btn-laranja">Sair</button>
                 </div>
             </div>
         </div>
