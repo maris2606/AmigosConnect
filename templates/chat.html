@@ -14,6 +14,43 @@
     <link rel="stylesheet" href="../static/css/chat.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            var nome_usuario = " {{usuario.nomeUsuario}} ";
+            const mensagem = document.querySelector('#input_mensagem');
+
+            // provavelmente aqui nessa função viria algo semelhante pra enviar midia. mas a gnt pensa dps.
+        
+            // evento de enviar mensagem pro chat
+            btn.addEventListener('click', () => {
+                let msg = mensagem.value;
+                // let nome = nome_usuario ? nome_usuario.value : 'Usuário Desconhecido'; // Atribui o nome, ou "Usuário Desconhecido" caso não haja
+
+                if (msg.trim() != '') {
+                    chat.innerHTML += `<div class="enviada p-3 d-flex">
+                                <div class="mensagem p-3">
+                                    <div class="row w-100 m-0">
+                                        <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
+                                        <p class="user-msg">${nome_usuario}</p> 
+                                    </div>
+                
+                                    <div class="row w-100 m-0 conteudo">
+                                        <p>${msg}</p>
+                                    </div>
+                
+                                    <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
+                                        <p class="m-0">16:04</p>
+                                    </div>
+                                </div>
+                            </div>`;
+                    mensagem.value = '';
+
+                    chat.scrollTop = chat.scrollHeight;
+            }
+        });
+    });
+
+    </script>
 </head>    
 <body>
     
@@ -69,7 +106,7 @@
                         <img class="icon-btn" src="/static/icons/pessoa.svg" alt="icone de pessoa">
                         <p class="m-0">Participantes</p>
                     </a>
-                    <a class="btn-laranja-redondo" href="/templates/info-connect.html">
+                    <a class="btn-laranja-redondo" href="/info-connect.html">
                         <img class="icon-btn" src="/static/icons/info.svg" alt="icone de mais informações">
                     </a>
                 </div>

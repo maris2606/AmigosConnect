@@ -129,6 +129,12 @@ def criar_connect():
             salvar_participantes_connect(con,id_p) 
      
     return render_template("/chat.html", usuario=session['usuario'], connect = obter_connect_pelo_id(con,14))
+
+@app.route("/chat.html", methods=['POST'] )
+def salvar_chat(): 
+    
+    return render_template("chat.html", usuario = session['usuario'], connect = obter_connect_pelo_id(con,14), mensagens = obter_mensagens_do_connect(con, 14))
+
 conexao_fechar(con)
 
 app.run(debug=True)
