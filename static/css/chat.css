@@ -409,3 +409,36 @@ html{
     border-radius: 30px;
     color: white;
 }
+
+.btn-lista-entrar {
+    border-radius: 50px;
+    padding: 10px 25px;
+    background-color: var(--more-light-yellow-color);
+
+    transition: 200ms all ease-in-out;
+}
+
+.btn-lista-sair {
+    border-radius: 50px;
+    padding: 10px 25px;
+    background-color: var(--light-yellow-color);
+
+    transition: 200ms all ease-in-out;
+}
+
+.btn-lista-entrar:hover, .btn-lista-sair:hover {
+    transform: scale(1.1);
+}
+
+
+.btn-lista-entrar:focus , .btn-lista-sair:focus{
+    outline: none;
+}
+
+.btn-lista-entrar:focus , .btn-lista-sair:focus{
+    outline: none;
+}
+
+.nome-connect-modal {
+    font-size: 1.8rem;
+}
