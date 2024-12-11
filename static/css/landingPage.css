@@ -143,6 +143,7 @@ a{
 .icone {
     height: 196px;
     border-radius: 100px;
+    margin-bottom: 10px;
 }
 
 .link-github {
