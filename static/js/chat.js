@@ -1,4 +1,5 @@
-const mensagem = document.querySelector('#input_mensagem');
+
+console.log(nome_usuario)
 
 const btn = document.querySelector('#btn_enviar');
 
@@ -19,37 +20,8 @@ btn_add_data.addEventListener("click", ()=>{
 });
 
 
-
 // rola pra mensagem mais recente
 chat.scrollTop = chat.scrollHeight;
-
-// provavelmente aqui nessa função viria algo semelhante pra enviar midia. mas a gnt pensa dps.
-// evento de enviar mensagem pro chat
-btn.addEventListener('click', ()=>{
-    let msg = mensagem.value;
-    
-    if (msg.trim() != '') {
-        chat.innerHTML += `<div class="enviada p-3 d-flex">
-                    <div class="mensagem p-3">
-                        <div class="row w-100 m-0">
-                            <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
-                            <p class="user-msg">jossaninha</p>
-                        </div>
-    
-                        <div class="row w-100 m-0 conteudo">
-                            <p>${msg}</p>
-                        </div>
-    
-                        <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
-                            <p class="m-0">16:04</p>
-                        </div>
-                    </div>
-                </div>`
-        mensagem.value = '';
-
-        chat.scrollTop = chat.scrollHeight;
-    }
-});
 
 
 let n_alt = 2;
@@ -89,12 +61,6 @@ btn_cancelar_enquete.addEventListener('click', ()=>{
 btn_close_enquete.addEventListener('click', ()=>{
     resetar_alternativas();
 });
-
-
-
-
-
-
 
 
 
