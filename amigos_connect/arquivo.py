@@ -61,6 +61,25 @@ def salvar_connect(con, connect):
 
     cursor.close()
 
+def salvar_mensagem(con, mensagem):
+    cursor = con.cursor()
+
+    sql = 'INSERT INTO Mensagem (textoMensagem, dataEnvio, fk_Usuario_idUsuario, fk_Connect_idConnect) VALUES (%s, %s, %s, %s)'
+    
+    valores = (
+        mensagem.get_texto_mensagem(),
+        mensagem.get_data_envio(),
+        mensagem.get_usuario(),
+        mensagem.get_connect()
+    )
+
+    cursor.execute(sql, valores)
+
+    con.commit()
+
+    cursor.close()
+
+
 def obter_ultimo_connect(con):
     cursor = con.cursor(dictionary=True)
     sql = "SELECT * FROM Connect ORDER BY idConnect DESC LIMIT 1"
