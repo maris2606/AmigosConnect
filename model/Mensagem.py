@@ -5,7 +5,7 @@ class Mensagem:
     def __init__(self,id_mensagem, texto_mensagem, data_envio, usuario, connect):
         self.__id_mensagem = id_mensagem
         self.__texto_mensagem = texto_mensagem
-        self.__data_envio = datetime.strptime(data_envio, "%Y-%m-%d").date()
+        self.__data_envio = data_envio
         self.__usuario = usuario #Objeto Usuário
         self.__connect = connect #objeto Connect 
 
@@ -23,7 +23,7 @@ class Mensagem:
         return self.__data_envio
 
     def set_data_envio(self, data_envio):
-        self.__data_envio = datetime.strptime(data_envio, "%Y-%m-%d").date()
+        self.__data_envio = data_envio
 
     def get_usuario(self):
         return self.__usuario

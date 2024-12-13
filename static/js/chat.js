@@ -24,88 +24,88 @@ btn_add_data.addEventListener("click", ()=>{
 chat.scrollTop = chat.scrollHeight;
 
 
-let n_alt = 2;
+// let n_alt = 2;
 
-// adicionar alternativa na criação de enquete
-btn_add_alternativa.addEventListener('click', ()=>{
+// // adicionar alternativa na criação de enquete
+// btn_add_alternativa.addEventListener('click', ()=>{
 
-    // a cada alternativa adiciona um pro id ser diferente
-    n_alt++;
+//     // a cada alternativa adiciona um pro id ser diferente
+//     n_alt++;
 
-    area_alternativas.innerHTML += `
-    <span class="d-flex justify-content-between w-100">
-        <label class="mt-3" for="enquete_a${n_alt}">Alternativa ${n_alt}:</label>
-        <input type="text" name="alternativa-${n_alt}" id="enquete_a${n_alt}">
-    </span>
-    ` ;
-});
-
-
-function resetar_alternativas () {
-    area_alternativas.innerHTML = `<span class="d-flex justify-content-between w-100">
-        <label class="mt-3" for="enquete_a1">Alternativa 1:</label>
-        <input type="text" name="alternativa-1" id="enquete_a1">
-    </span>
-
-    <span class="d-flex justify-content-between w-100">
-        <label class="mt-3" for="enquete_a2">Alternativa 2:</label>
-        <input type="text" name="alternativa-2" id="enquete_a2">
-    </span>`;
-}
-
-btn_cancelar_enquete.addEventListener('click', ()=>{
-    resetar_alternativas();
-});
-
-// precisa ter os dois pq a pessoa pode fechar pelo x
-btn_close_enquete.addEventListener('click', ()=>{
-    resetar_alternativas();
-});
+//     area_alternativas.innerHTML += `
+//     <span class="d-flex justify-content-between w-100">
+//         <label class="mt-3" for="enquete_a${n_alt}">Alternativa ${n_alt}:</label>
+//         <input type="text" name="alternativa-${n_alt}" id="enquete_a${n_alt}">
+//     </span>
+//     ` ;
+// });
 
 
+// function resetar_alternativas () {
+//     area_alternativas.innerHTML = `<span class="d-flex justify-content-between w-100">
+//         <label class="mt-3" for="enquete_a1">Alternativa 1:</label>
+//         <input type="text" name="alternativa-1" id="enquete_a1">
+//     </span>
 
-// esse daqui o chat ajudou, mas funcionou direitinho e a logica ta ok
+//     <span class="d-flex justify-content-between w-100">
+//         <label class="mt-3" for="enquete_a2">Alternativa 2:</label>
+//         <input type="text" name="alternativa-2" id="enquete_a2">
+//     </span>`;
+// }
 
-// Inicializa um objeto de votos para armazenar os votos de cada opção
-let votos = {
-    "Bienal do Livro": 5,
-    "Ibirapuera": 7,
-    "Paulista": 6,
-    "Tucuruvi": 10
-};
+// btn_cancelar_enquete.addEventListener('click', ()=>{
+//     resetar_alternativas();
+// });
 
-// Função para atualizar as barras de progresso
-function atualizarBarras() {
-    let totalVotos = Object.values(votos).reduce((a, b) => a + b, 0);
-
-    // Atualiza cada barra de acordo com a quantidade de votos
-    for (let nome in votos) {
-        let porcentagem = totalVotos === 0 ? 0 : (votos[nome] / totalVotos) * 100;
-        const barra = document.getElementById(`barra-${nome.toLowerCase().replace(/\s+/g, '-')}`);
-        barra.style.width = `${porcentagem}%`;
-    }
-}
+// // precisa ter os dois pq a pessoa pode fechar pelo x
+// btn_close_enquete.addEventListener('click', ()=>{
+//     resetar_alternativas();
+// });
 
 
-// Adiciona evento de 'click' para todos os radio
-document.querySelectorAll(".voto").forEach(radio => {
-    radio.addEventListener("change", (e) => {
-        const nome = e.target.dataset.nome;
+
+// // esse daqui o chat ajudou, mas funcionou direitinho e a logica ta ok
+
+// // Inicializa um objeto de votos para armazenar os votos de cada opção
+// let votos = {
+//     "Bienal do Livro": 5,
+//     "Ibirapuera": 7,
+//     "Paulista": 6,
+//     "Tucuruvi": 10
+// };
+
+// // Função para atualizar as barras de progresso
+// function atualizarBarras() {
+//     let totalVotos = Object.values(votos).reduce((a, b) => a + b, 0);
+
+//     // Atualiza cada barra de acordo com a quantidade de votos
+//     for (let nome in votos) {
+//         let porcentagem = totalVotos === 0 ? 0 : (votos[nome] / totalVotos) * 100;
+//         const barra = document.getElementById(`barra-${nome.toLowerCase().replace(/\s+/g, '-')}`);
+//         barra.style.width = `${porcentagem}%`;
+//     }
+// }
+
+
+// // Adiciona evento de 'click' para todos os radio
+// document.querySelectorAll(".voto").forEach(radio => {
+//     radio.addEventListener("change", (e) => {
+//         const nome = e.target.dataset.nome;
     
-        // Verifica se a opção foi marcada ou desmarcada
-        if (e.target.checked) {
-            votos[nome]++;
-        } else {
-            votos[nome]--;
-        }
+//         // Verifica se a opção foi marcada ou desmarcada
+//         if (e.target.checked) {
+//             votos[nome]++;
+//         } else {
+//             votos[nome]--;
+//         }
     
-        // Atualiza as barras
-        atualizarBarras();
-    });
+//         // Atualiza as barras
+//         atualizarBarras();
+//     });
 
-});
+// });
 
-// Chama a função para inicializar as barras
-atualizarBarras();
+// // Chama a função para inicializar as barras
+// atualizarBarras();
 
 

@@ -125,7 +125,7 @@ def obter_connect_pelo_id(con, id_connect):
     cursor.execute(sql, (id_connect,))  
     connect = cursor.fetchone()  
 
-    connect['fotoConnect'] = base64.b64encode(connect['fotoConnect']).decode('utf-8')
+    connect['fotoConnect'] = base64.b64encode(connect['fotoConnect'])
 
     return connect
 

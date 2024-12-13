@@ -18,37 +18,46 @@
         document.addEventListener('DOMContentLoaded', ()=>{
             var nome_usuario = " {{usuario.nomeUsuario}} ";
             const mensagem = document.querySelector('#input_mensagem');
-
-            // provavelmente aqui nessa função viria algo semelhante pra enviar midia. mas a gnt pensa dps.
-        
-            // evento de enviar mensagem pro chat
             btn.addEventListener('click', () => {
-                let msg = mensagem.value;
-                // let nome = nome_usuario ? nome_usuario.value : 'Usuário Desconhecido'; // Atribui o nome, ou "Usuário Desconhecido" caso não haja
+    let msg = mensagem.value;
 
-                if (msg.trim() != '') {
-                    chat.innerHTML += `<div class="enviada p-3 d-flex">
-                                <div class="mensagem p-3">
-                                    <div class="row w-100 m-0">
-                                        <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
-                                        <p class="user-msg">${nome_usuario}</p> 
-                                    </div>
-                
-                                    <div class="row w-100 m-0 conteudo">
-                                        <p>${msg}</p>
-                                    </div>
-                
-                                    <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
-                                        <p class="m-0">16:04</p>
-                                    </div>
+    if (msg.trim() != '') {
+        chat.innerHTML += `<div class="enviada p-3 d-flex">
+                            <div class="mensagem p-3">
+                                <div class="row w-100 m-0">
+                                    <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
+                                    <p class="user-msg">${nome_usuario}</p> 
                                 </div>
-                            </div>`;
-                    mensagem.value = '';
+                                <div class="row w-100 m-0 conteudo">
+                                    <p>${msg}</p>
+                                </div>
+                                <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
+                                    <p class="m-0">16:04</p>
+                                </div>
+                            </div>
+                        </div>`;
 
-                    chat.scrollTop = chat.scrollHeight;
-            }
+        mensagem.value = '';
+        chat.scrollTop = chat.scrollHeight;
+
+        // Envia a mensagem para o servidor Python
+        fetch('/chat.html', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ msg: msg })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Mensagem enviada com sucesso:', data);
+        })
+        .catch(error => {
+            console.error('Erro ao enviar a mensagem:', error);
         });
+    }
     });
+});
 
     </script>
 </head>    
@@ -97,7 +106,7 @@
             <div class="row barra-topo mt-3 mx-5 p-3 d-flex justify-content-between align-items-center bg-white">
                 
                 <div class="col h-100 connect-info d-flex justify-content-start align-items-center">
-                    <img class="img-connect" src="data:image/png;base64,{{ connect.fotoConnect }} alt="imagem padrão do connect">
+                    <img class="img-connect" src="data:image/jpeg;base64,{{ connect.fotoConnect }} alt="imagem padrão do connect">
                     <p class="nome-connect m-0">{{connect.nomeConnect}}</p>
                 </div>
 
