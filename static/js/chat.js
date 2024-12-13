@@ -107,5 +107,3 @@ chat.scrollTop = chat.scrollHeight;
 
 // // Chama a função para inicializar as barras
 // atualizarBarras();
-
-

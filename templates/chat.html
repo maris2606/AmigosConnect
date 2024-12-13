@@ -22,6 +22,18 @@
     let msg = mensagem.value;
 
     if (msg.trim() != '') {
+
+        const data = new Date();
+                const ano = data.getFullYear();
+                const mes = String(data.getMonth() + 1).padStart(2, '0');  // Mês começa em 0
+                const dia = String(data.getDate()).padStart(2, '0');
+                const hora = String(data.getHours()).padStart(2, '0');
+                const minuto = String(data.getMinutes()).padStart(2, '0');
+                const segundo = String(data.getSeconds()).padStart(2, '0');
+
+                const dataHora = `${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}`;
+                const horario = `${hora}:${minuto}`;
+        
         chat.innerHTML += `<div class="enviada p-3 d-flex">
                             <div class="mensagem p-3">
                                 <div class="row w-100 m-0">
@@ -32,7 +44,7 @@
                                     <p>${msg}</p>
                                 </div>
                                 <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
-                                    <p class="m-0">16:04</p>
+                                    <p class="m-0">${horario}</p>
                                 </div>
                             </div>
                         </div>`;
@@ -46,7 +58,7 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ msg: msg })
+            body: JSON.stringify({ msg: msg, dataHora: dataHora })
         })
         .then(response => response.json())
         .then(data => {
@@ -58,6 +70,33 @@
     }
     });
 });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var listaDeDatas = []
+        document.querySelector('.btn-add-data').addEventListener('click', function() {
+            var dataSelecionada = document.getElementById('result').value;
+            console.log('Data selecionada:', dataSelecionada);
+            listaDeDatas.push(dataSelecionada);
+        });
+
+        document.querySelector('#btn-confirmar').addEventListener('click', function() {
+        fetch('/chat.html', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ datas: listaDeDatas })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Lista de datas enviada com sucesso:', data);
+        })
+        .catch(error => {
+            console.error('Erro ao enviar a lista de datas:', error);
+        });
+    });
+});
+
 
     </script>
 </head>    
@@ -78,24 +117,24 @@
             <div class="abas h-25">
                 <a href="" class="row pb-5 d-flex justify-content-start align-items-center">
                     <img src="/static/icons/people.svg" alt="ícone de pessoas">
-                    <p>amigos</p>
+                    <p>Amigos</p>
                 </a>
 
-                <a href="" class="row pt-5 d-flex justify-content-start align-items-center">
+                <a href="/meus-connects.html" class="row pt-5 d-flex justify-content-start align-items-center">
                     <img src="/static/icons/chat_bubble_fill.svg" alt="ícone de chat">
-                    <p>meus connects</p>
+                    <p>Meus Connects</p>
                 </a>
             </div>
 
             <div class="config h-25">
-                <a href="" class="row pb-5 d-flex justify-content-start align-items-center">
+                <a href="/configuracoes.html" class="row pb-5 d-flex justify-content-start align-items-center">
                     <img src="/static/icons/settings.svg" alt="ícone de engrenagem">
-                    <p>configurações</p>
+                    <p>Configurações</p>
                 </a>
 
-                <a href="" class="row pt-5 d-flex justify-content-start align-items-center">
+                <a href="/login.html" class="row pt-5 d-flex justify-content-start align-items-center">
                     <img src="/static/icons/logout.svg" alt="ícone de saída">
-                    <p>sair</p>
+                    <p>Sair</p>
                 </a>
             </div>
 
@@ -123,22 +162,26 @@
 
             <div class="row chat">
                 {% for mensagem in mensagens %}
-                    <div class="recebida p-3 d-flex">
-                        <div class="mensagem p-3">
-                            <div class="row w-100 m-0">
-                                <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
-                                <p class="user-msg">{{mensagem.nomeUsuario}}</p>
-                            </div>
-        
-                            <div class="row w-100 m-0 conteudo">
-                                <p> {{mensagem.textoMensagem}} </p>
-                            </div>
-        
-                            <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
-                                <p class="m-0">{{mensagem.dataEnvio}}</p>
-                            </div>
+                    {% if mensagem.idUsuario == usuario.idUsuario %}
+                        <div class="enviada p-3 d-flex">
+                    {% else %}
+                        <div class="recebida p-3 d-flex">
+                    {% endif %}
+                    <div class="mensagem p-3">
+                        <div class="row w-100 m-0">
+                            <img class="pfp-pic-msg mr-3" src="/static/icons/Generic avatar.svg" alt="foto de perfil">
+                            <p class="user-msg">{{mensagem.nomeUsuario}}</p>
                         </div>
-                    </div>  
+    
+                        <div class="row w-100 m-0 conteudo">
+                            <p> {{mensagem.textoMensagem}} </p>
+                        </div>
+    
+                        <div class="row hora-msg w-100 m-0 d-flex justify-content-end align-items-end">
+                            <p class="m-0">{{mensagem.dataEnvio}}</p>
+                        </div>
+                    </div>
+                </div>  
                 {% endfor %}
             </div>
 
@@ -268,7 +311,7 @@
                 
                     <div class="row justify-content-center w-100">
                         <div class="col text-center">
-                          <input type="text" class="form-control w-25 mx-auto mb-3" id="result" placeholder="Select date" disabled="">
+                          <input type="text" class="form-control w-25 mx-auto mb-3" id="result" placeholder="Select date">
                             <form action="#" class="row">
                                 <div class="col-md-12">
                                     <div id="inline_cal"></div>
@@ -282,7 +325,7 @@
 
                 <div class="modal-footer p-3">
                     <button type="button" class="px-5 btn-laranja-outline cancelar-enquete" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="px-5 btn-laranja">Confirmar</button>
+                    <button type="button" class="px-5 btn-laranja" id="btn-confirmar">Confirmar</button>
                 </div>
             </div>
         </div>
