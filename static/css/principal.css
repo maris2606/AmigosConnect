@@ -304,3 +304,38 @@ label {
     gap: 10px;
 }
 
+/*----------------------------------*/
+
+.btn-modo-claro{
+    border-radius: 50px;
+    background-color: var(--more-light-yellow-color);
+    padding: 15px;
+    gap: 10px;
+
+    transition: all 200ms ease-in-out;
+}
+
+.btn-modo-escuro{
+    border-radius: 50px;
+    color: var(--white-color);
+    background-color: var(--dark-blue-color);
+    padding: 15px;
+    gap: 10px;
+
+    transition: all 200ms ease-in-out;
+}
+
+.btn-modo-escuro:hover, .btn-modo-claro:hover {
+    transform: scale(1.05);
+
+    cursor: pointer;
+}
+
+.btn-modo-escuro:focus, .btn-modo-claro:focus {
+    outline: none;
+}
+
+.btn-modo-escuro p, .btn-modo-claro p  {
+    margin: 0;
+    font-size: 1.8rem;
+}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Connect</title>
+    <title>Configurações</title>
 
     <link rel="stylesheet" href="/static/css/variaveis.css">
     <link rel="stylesheet" href="../static/css/principal.css">
@@ -52,40 +52,41 @@
 
         <div class="col-10 criar-connect-main d-flex justify-content-center align-items-center">
             <div class="row w-100 h-100 d-flex justify-content-center align-items-center">
-                <div class="col-8 card-criar-connect bg-white">
-                    <h1 class="row text-center py-4 d-flex justify-content-center">Criar connect</h1>
+                <div class="col-6 card-criar-connect bg-white">
+                    <h1 class="row text-center py-4 d-flex justify-content-center">Configurações</h1>
 
                     <form class="row d-flex flex-column justify-content-around" action="/criar-connect.html" method="post" enctype="multipart/form-data" >
-                        <label class="mt-3" for="nome-connect">Nome do connect:</label>
-                        <input class="input-text w-100" type="text" name="nome-connect" id="nome_connect" placeholder="Digite o nome do connect">
-                        <input type="hidden" id="amigos_selecionados_input" name="amigos_selecionados">
+                        <h2 class="row">Modo:</h1>
 
-                        <span class="d-flex justify-content-start align-items-center">
-                            <label class="mt-3 w-50">Foto do connect:</label>
-                            
-                            <label for="foto_connect" class="w-100 custom-file-button">Escolher imagem</label>
-                            <input class="input-image w-100" type="file" accept="image/*" name="foto-connect" id="foto_connect">
-                        </span>
-
-                        <div class="form-group">
-                            <label id="label-selecionar" for="amigos_select">Adicionar amigos</label>
-                            <select class="form-control" id="amigos_select">
-                                <option id="default_select" value="0">Selecionar amigos</option>
-                                {% for u in usuarios %}
-                                    {% if u.idUsuario != usuario.idUsuario %}
-                                        <option value=@{{u.nomeUsuario}}>@ {{u.nomeUsuario}} </option> 
-                                    {% endif %}
-                                {% endfor %}                               
-                            </select>
+                        <div class="row mb-5 pt-3 d-flex w-100 justify-content-between align-items-center">
+                            <button type="button" class="btn-modo col-4 d-flex align-items-center btn-modo-claro">
+                                <img class="icon-btn" src="/static/icons/modo_claro.svg" alt="icone">
+                                <p>claro</p>
+                            </button>
                         </div>
-                        <div class="row amigos-selecionados d-flex flex-column flex-nowrap align-items-end">
-                            
+
+                        <h2 class="row my-5">Editar dados:</h1>
+
+                        <label class="row mt-3" for="nome">Nome completo:</label>
+                        <input class="row input-text" type="text" name="nome" id="nome" placeholder="Digite seu nome completo">
                     
-                        </div>
+                        <label class="row mt-3" for="usuario">Usuário:</label>
+                        <input class="row input-text" type="text" name="usuario" id="usuario" placeholder="Digite seu nome de usuário">
+                    
+                        <label class="row mt-3" for="email">Email:</label>
+                        <input class="row input-text" type="email" name="email" id="email" placeholder="Digite seu email">
+                    
+                        <label class="row mt-3" for="senha">Senha:</label>
+                        <input class="row input-text" type="password" name="senha" id="senha" placeholder="Digite sua senha">
+                    
+                        <label class="row mt-3" for="confirma-senha">Confirmar Senha:</label>
+                        <input class="row input-text" type="password" name="confirma-senha" id="confirma-senha" placeholder="Confirme sua senha">
+                        
+                      
 
-                        <span class="row p-3 d-flex justify-content-between align-items-center">
-                            <button type="button" class="col-5 px-5 btn-laranja-outline cancelar">Cancelar</button>
-                            <button type="submit" class="col-5 px-5 btn-laranja">Conectar</button>
+                        <span class="row p-3 mt-5 d-flex justify-content-between align-items-center">
+                            <button type="button" class="col-4 px-5 btn-laranja-outline cancelar">Cancelar</button>
+                            <button type="submit" class="col-6 px-5 btn-laranja">Salvar alterações</button>
                         </span>
                     </form>
                 </div>
@@ -93,7 +94,7 @@
         </div>
     </div>
 
-    <script src="/static/js/criar-connect.js"></script>
+    <script src="/static/js/configuracoes.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
