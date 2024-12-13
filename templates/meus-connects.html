@@ -11,7 +11,7 @@
 </head>    
 <body>
     
-    <div class="container-fluid d-flex main p-0">
+    <div class="container-fluid d-flex feed p-0">
         <div class="py-5 col-2 barra-lateral d-flex flex-column justify-content-between align-items-center">
             
             <div class="profile-logo h-50">
@@ -19,57 +19,58 @@
 
                 <a href="" class="row d-flex justify-content-start align-items-center">
                     <img id="pfp_usuario" src="/static/icons/Generic avatar.svg" alt="foto do usuário">
-                    <p>@ {{usuario.nomeUsuario}} </p>
+                    <p>@{{usuario.nomeUsuario}}</p>
                 </a>
             </div>
 
             <div class="abas h-25">
                 <a href="" class="row pb-5 d-flex justify-content-start align-items-center">
                     <img src="/static/icons/people.svg" alt="ícone de pessoas">
-                    <p>amigos</p>
+                    <p>Amigos</p>
                 </a>
 
-                <a href="" class="row pt-5 d-flex justify-content-start align-items-center">
+                <a href="/meus-connects.html" class="row pt-5 d-flex justify-content-start align-items-center">
                     <img src="/static/icons/chat_bubble_fill.svg" alt="ícone de chat">
-                    <p>meus connects</p>
+                    <p>Meus Connects</p>
                 </a>
             </div>
 
             <div class="config h-25">
-                <a href="" class="row pb-5 d-flex justify-content-start align-items-center">
+                <a href="/configuracoes.html" class="row pb-5 d-flex justify-content-start align-items-center">
                     <img src="/static/icons/settings.svg" alt="ícone de engrenagem">
-                    <p>configurações</p>
+                    <p>Configurações</p>
                 </a>
 
-                <a href="" class="row pt-5 d-flex justify-content-start align-items-center">
+                <a href="/login.html" class="row pt-5 d-flex justify-content-start align-items-center">
                     <img src="/static/icons/logout.svg" alt="ícone de saída">
-                    <p>sair</p>
+                    <p>Sair</p>
                 </a>
             </div>
 
         </div>
-
         
         <div class="col-10 chat-main-info-participantes d-flex flex-column justify-content-center align-items-center p-5">
             <div class="row w-100 h-100 p-5 d-flex flex-column justify-content-between align-items-center">
                 
                 <div class="col-9 card-chat d-flex h-100 flex-column justify-content-between align-items-center bg-white">
                     <div class="row w-100 d-flex justify-content-center">
-                        <h1 class="row w-100 p-5 text-center">Participantes</h1>
+                        <h1 class="row w-100 p-5 text-center">Meus Connects</h1>
                     </div>
-                
-                    <ul class="row w-100 px-5 list-group lista">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p class="m-0 p-0">natal dedigados</p>
-                            <div class="botoes">
-                                <button class="btn-lista-entrar mr-3" type="button">entrar</button>
-                                <button class="btn-lista-sair" data-toggle="modal" data-target="#confirmar_saida" class="btn-sair-connect" type="button">sair do connect</button>
-                            </div>
-                        </li>
-                    </ul>
-
+                        <ul class="row w-100 px-5 list-group lista">
+                            {% for connect in connects %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <p class="m-0 p-0">{{connect.nomeConnect}}</p> 
+                                <div class="botoes">
+                                    <form method="POST" action="/meus-connects.html">
+                                        <input type="hidden" name="id_connect" value="{{ connect.idConnect }}">
+                                        <button class="btn-lista-entrar mr-3" type="submit">Entrar</button>
+                                    </form>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
                     <div class="row w-100 p-5 d-flex justify-content-center w-75">
-                        <a class="btn-laranja text-center w-100" href="/chat.html">voltar</a>
+                        <a class="btn-laranja text-center w-100" href="/feed.html">Voltar</a>
                     </div>                
                 </div>
             </div>

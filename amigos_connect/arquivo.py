@@ -149,7 +149,7 @@ def obter_nomes_usuarios_do_connect(con, id_connect):
 def obter_mensagens_do_connect(con, id_connect):
     cursor = con.cursor(dictionary=True)  
     sql = """
-        SELECT M.idMensagem, M.textoMensagem, M.dataEnvio, U.nomeUsuario
+        SELECT M.idMensagem, M.textoMensagem, M.dataEnvio, U.nomeUsuario, U.idUsuario
         FROM Mensagem M
         JOIN Usuario U ON M.fk_Usuario_idUsuario = U.idUsuario
         WHERE M.fk_Connect_idConnect = %s
@@ -159,11 +159,83 @@ def obter_mensagens_do_connect(con, id_connect):
     mensagens = []
 
     for registro in cursor:
+        data_envio = registro['dataEnvio']
+        hora_formatada = data_envio.strftime('%H:%M') if data_envio else None
+
         mensagens.append({
             'idMensagem': registro['idMensagem'],
             'textoMensagem': registro['textoMensagem'],
-            'dataEnvio': registro['dataEnvio'],
-            'nomeUsuario': registro['nomeUsuario']
+            'dataEnvio': hora_formatada,
+            'nomeUsuario': registro['nomeUsuario'], 
+            'idUsuario': registro['idUsuario']
         })
 
     return mensagens
+
+def obter_connects_por_usuario(con, id_usuario):
+    cursor = con.cursor(dictionary=True)
+    sql = """
+        SELECT 
+            C.idConnect, 
+            C.nomeConnect, 
+            C.fotoConnect
+        FROM 
+            Connect C
+        JOIN 
+           Connect_Usuario UC ON C.idConnect = UC.fk_Connect_idConnect
+        WHERE 
+            UC.fk_Usuario_idUsuario = %s
+    """
+    cursor.execute(sql, (id_usuario,))
+    connects = []
+
+    for registro in cursor:
+        connects.append({
+            'idConnect': registro['idConnect'],
+            'nomeConnect': registro['nomeConnect'],
+            'fotoConnect': registro['fotoConnect']
+        })
+
+    return connects
+
+
+# def salvar_calendario(con, calendario):
+#     cursor = con.cursor()
+
+#     sql = 'INSERT INTO Calendario (fk_Connect_idConnect) VALUES (%s)'
+    
+#     valores = (
+#         calendario.get_connect_id(),  
+#     )
+
+#     cursor.execute(sql, valores)
+
+#     con.commit()
+
+#     cursor.close()
+
+
+def salvar_data_indisponivel(con, data_indisponivel, id_connect):
+    cursor = con.cursor()
+
+    sql = 'INSERT INTO Datas_indisponiveis (dataIndisponivel, fk_Connect_idConnect) VALUES (%s, %s)'
+    
+    valores = (
+        data_indisponivel,      
+        id_connect,
+    )
+
+    cursor.execute(sql, valores)
+
+    con.commit()
+
+    cursor.close()
+
+# def obter_ultimo_calendario(con):
+#     cursor = con.cursor(dictionary=True)
+#     sql = "SELECT * FROM calendario ORDER BY idCalendario DESC LIMIT 1"
+#     cursor.execute(sql)
+
+#     ultimo_calendario = cursor.fetchone()
+
+#     return ultimo_calendario['idCalendario']
