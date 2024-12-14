@@ -11,7 +11,7 @@
 </head>    
 <body>
     
-    <div class="container-fluid d-flex main p-0">
+    <div class="container-fluid d-flex p-0">
         <div class="py-5 col-2 barra-lateral d-flex flex-column justify-content-between align-items-center">
             
             <div class="profile-logo h-50">
@@ -19,31 +19,31 @@
 
                 <a href="" class="row d-flex justify-content-start align-items-center">
                     <img id="pfp_usuario" src="/static/icons/Generic avatar.svg" alt="foto do usuário">
-                    <p>@ {{usuario.nomeUsuario}} </p>
+                    <p id="nome_usuario">@{{usuario.nomeUsuario}}</p>
                 </a>
             </div>
 
             <div class="abas h-25">
                 <a href="" class="row pb-5 d-flex justify-content-start align-items-center">
                     <img src="/static/icons/people.svg" alt="ícone de pessoas">
-                    <p>amigos</p>
+                    <p>Amigos</p>
                 </a>
 
-                <a href="" class="row pt-5 d-flex justify-content-start align-items-center">
+                <a href="/meus-connects.html" class="row pt-5 d-flex justify-content-start align-items-center">
                     <img src="/static/icons/chat_bubble_fill.svg" alt="ícone de chat">
-                    <p>meus connects</p>
+                    <p>Meus Connects</p>
                 </a>
             </div>
 
             <div class="config h-25">
-                <a href="" class="row pb-5 d-flex justify-content-start align-items-center">
+                <a href="/configuracoes.html" class="row pb-5 d-flex justify-content-start align-items-center">
                     <img src="/static/icons/settings.svg" alt="ícone de engrenagem">
-                    <p>configurações</p>
+                    <p>Configurações</p>
                 </a>
 
-                <a href="" class="row pt-5 d-flex justify-content-start align-items-center">
+                <a href="/login.html" class="row pt-5 d-flex justify-content-start align-items-center">
                     <img src="/static/icons/logout.svg" alt="ícone de saída">
-                    <p>sair</p>
+                    <p>Sair</p>
                 </a>
             </div>
 
