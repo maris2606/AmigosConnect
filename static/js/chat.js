@@ -19,7 +19,6 @@ btn_add_data.addEventListener("click", ()=>{
     selected.classList.add('indisponivel');
 });
 
-
 // rola pra mensagem mais recente
 chat.scrollTop = chat.scrollHeight;
 

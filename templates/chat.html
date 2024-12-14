@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <script>
+
         document.addEventListener('DOMContentLoaded', ()=>{
             var nome_usuario = " {{usuario.nomeUsuario}} ";
             const mensagem = document.querySelector('#input_mensagem');
@@ -94,6 +95,37 @@
         .catch(error => {
             console.error('Erro ao enviar a lista de datas:', error);
         });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Assegurando que datas_indisponiveis seja um array válido antes de manipular
+    const datas = JSON.parse('{{ datas_indisponiveis | tojson }}');
+    console.log('Datas selecionadas:', datas);
+
+    // Função para formatar a data para "DD / MM / YYYY"
+    function formatDate(date) {
+        const d = new Date(date);
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0'); // Meses começam do 0, então somamos 1
+        const year = d.getFullYear();
+        return `${day} / ${month} / ${year}`;
+    }
+
+    // Iterando sobre as datas
+    datas.forEach(date => {
+        // Formatando a data para "DD / MM / YYYY"
+        const formattedDate = formatDate(date);
+        console.log('Data indisponível:', formattedDate);
+        
+        // Agora, a comparação acontece com o formato desejado
+        const dayElement = document.querySelector(`[data-date="${formattedDate}"]`);
+        console.log(dayElement);
+        document.querySelectorAll('[data-date]').forEach(el => console.log(el.getAttribute('data-date')));
+        
+        if (dayElement) {
+            dayElement.classList.add('indisponivel');
+        }
     });
 });
 

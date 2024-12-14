@@ -140,18 +140,22 @@ def criar_connect():
         if type(id_p) == int:
             salvar_participantes_connect(con,id_p) 
      
-    return render_template("/chat.html", usuario=session['usuario'], connect = obter_ultimo_connect(con))
+    datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
+    return render_template("/chat.html", usuario=session['usuario'], connect = obter_ultimo_connect(con), datas_indisponiveis = datas_indisponiveis)
 
 
 @app.route("/meus-connects.html", methods=['POST'])
 def entrando_connect():
     id_connect = request.form['id_connect'].strip()
     session['connect'] = obter_connect_pelo_id(con,id_connect)
-    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']))
+
+    datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
+    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis = datas_indisponiveis)
 
 @app.route("/chat.html")
 def mostrar_chat(): 
-    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']))
+    datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
+    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis= datas_indisponiveis)
 
 @app.route("/chat.html", methods=['POST'])
 def salvar_chat(): 
@@ -174,7 +178,9 @@ def salvar_chat():
     print(f'Datas formatadas: {datas_formatadas}')
     for data in datas_formatadas: 
         salvar_data_indisponivel(con, data, session['connect']['idConnect'])
-    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']))
+    
+    datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
+    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis= datas_indisponiveis)
 
 @app.route("/templates/participantes.html")
 def participantes():
