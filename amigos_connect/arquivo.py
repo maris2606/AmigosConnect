@@ -27,9 +27,7 @@ def salvar_usuario(con, usuario):
     )
 
     cursor.execute(sql, valores)
-
     con.commit()
-
     cursor.close()
 
 def obter_id_usuario_por_nome(con, nome_usuario):
@@ -56,9 +54,7 @@ def salvar_connect(con, connect):
     )
 
     cursor.execute(sql, valores)
-
     con.commit()
-
     cursor.close()
 
 def salvar_mensagem(con, mensagem):
@@ -74,26 +70,28 @@ def salvar_mensagem(con, mensagem):
     )
 
     cursor.execute(sql, valores)
-
     con.commit()
-
     cursor.close()
-
 
 def obter_ultimo_connect(con):
     cursor = con.cursor(dictionary=True)
     sql = "SELECT * FROM Connect ORDER BY idConnect DESC LIMIT 1"
     cursor.execute(sql)
 
-    ultimo_connect = cursor.fetchone()
+    ultimo_connect = cursor.fetchone()  
+    con.commit()
 
-    return ultimo_connect['idConnect']
+    if ultimo_connect and ultimo_connect['fotoConnect']: 
+        # Converte a imagem em base64 
+        ultimo_connect['fotoConnect'] = base64.b64encode(ultimo_connect['fotoConnect']).decode('utf-8')
+    
+    return ultimo_connect
 
 def salvar_participantes_connect(con, participante):
     cursor = con.cursor()
-    id_connect = obter_ultimo_connect(con)
+    connect = obter_ultimo_connect(con)
     sql = 'INSERT INTO Connect_Usuario (fk_Connect_idConnect, fk_Usuario_idUsuario) VALUES (%s, %s)'
-    valores = (id_connect, participante,)
+    valores = (connect['idConnect'], participante,)
     cursor.execute(sql, valores)
 
     cursor.close()
@@ -115,19 +113,24 @@ def obter_nome_connect(con, id_usuario):
 
     return nomes_connect
 
+import base64
+
 def obter_connect_pelo_id(con, id_connect):
-    cursor = con.cursor(dictionary=True)  
+    cursor = con.cursor(dictionary=True)
     sql = """
         SELECT *
         FROM Connect
         WHERE idConnect = %s
     """
-    cursor.execute(sql, (id_connect,))  
-    connect = cursor.fetchone()  
+    cursor.execute(sql, (id_connect,))
+    connect = cursor.fetchone()
 
-    connect['fotoConnect'] = base64.b64encode(connect['fotoConnect'])
+    if connect and 'fotoConnect' in connect and connect['fotoConnect']:
+        # Convertendo para Base64 e decodificando para string
+        connect['fotoConnect'] = base64.b64encode(connect['fotoConnect']).decode('utf-8')
 
     return connect
+
 
 def obter_nomes_usuarios_do_connect(con, id_connect):
     cursor = con.cursor(dictionary=True) 
@@ -226,9 +229,7 @@ def salvar_data_indisponivel(con, data_indisponivel, id_connect):
     )
 
     cursor.execute(sql, valores)
-
     con.commit()
-
     cursor.close()
 
 # def obter_ultimo_calendario(con):
