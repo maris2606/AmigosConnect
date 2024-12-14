@@ -232,6 +232,21 @@ def salvar_data_indisponivel(con, data_indisponivel, id_connect):
     con.commit()
     cursor.close()
 
+def buscar_datas_indisponiveis(con, id_connect):
+    cursor = con.cursor()
+    sql = 'SELECT dataIndisponivel FROM Datas_indisponiveis WHERE fk_Connect_idConnect = %s'
+    valores = (id_connect,)
+    cursor.execute(sql, valores)
+    
+    # Recupera todas as datas e formata para um formato ISO
+    resultados = cursor.fetchall()
+    datas_indisponiveis = [resultado[0].strftime('%Y-%m-%d') for resultado in resultados]
+    cursor.close()
+    
+    return datas_indisponiveis
+
+
+
 # def obter_ultimo_calendario(con):
 #     cursor = con.cursor(dictionary=True)
 #     sql = "SELECT * FROM calendario ORDER BY idCalendario DESC LIMIT 1"
