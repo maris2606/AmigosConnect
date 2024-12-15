@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from flask_session import Session
 from datetime import datetime
 from conexao import conexao_fechar, conexao_abrir
@@ -17,7 +17,7 @@ from model.Calendario import Calendario
 
 app = Flask("Amigos_Connect")
 app.secret_key = "uma_chave_secreta" 
-con = conexao_abrir("localhost", "root", "Jossana@0308", "amigosconnect")
+con = conexao_abrir("localhost", "root", "Millena03*", "amigosconnect")
 
 app.config['SESSION_TYPE'] = 'filesystem'  # Ou use 'redis' para maior escalabilidade
 app.config['SESSION_FILE_DIR'] = './flask_session'  # Diretório local para sessões
@@ -185,6 +185,11 @@ def salvar_chat():
 @app.route("/templates/participantes.html")
 def participantes():
     return render_template("participantes.html", usuario = session['usuario'], participantes = obter_nomes_usuarios_do_connect(con,session['connect']['idConnect']))
+
+@app.route('/api/unavailable-dates', methods=['GET'])
+def unavailable_dates():
+    datas = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
+    return jsonify(datas)
 
 conexao_fechar(con)
 
