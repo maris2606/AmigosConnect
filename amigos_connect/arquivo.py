@@ -229,10 +229,10 @@ def buscar_datas_indisponiveis(con, id_connect):
 
 #salvar enquetes
 
-def salvar_enquete(con, nomeEnquete):
+def salvar_enquete(con, nomeEnquete, idUsuario):
     cursor = con.cursor()
-    sql = 'INSERT INTO Enquete (nomeEnquete) VALUES (%s)'
-    valores = (nomeEnquete,)
+    sql = 'INSERT INTO Enquete (nomeEnquete,fk_Usuario_idUsuario) VALUES (%s, %s)'
+    valores = (nomeEnquete,idUsuario)
     cursor.execute(sql,valores)
     con.commit()
     cursor.close()
@@ -312,3 +312,44 @@ def atualizar_voto_opcao(con, id_opcao):
     cursor.execute(sql, (id_opcao,))
     con.commit()
     cursor.close()
+
+def obter_informacoes_enquete_do_connect(con, id_connect):
+    cursor = con.cursor(dictionary=True)
+    
+    # Consulta para obter as informações da enquete e suas opções associadas ao id_connect
+    query = """
+    SELECT e.idEnquete, e.nomeEnquete, e.fk_Usuario_idUsuario, o.idOpcao, o.textoOpcao, o.numVotos
+    FROM Enquete e
+    INNER JOIN Connect_Enquete ce ON e.idEnquete = ce.fk_Enquete_idEnquete
+    INNER JOIN Opcao_Enquete oe ON e.idEnquete = oe.fk_Enquete_idEnquete
+    INNER JOIN Opcao o ON oe.fk_Opcao_idOpcao = o.idOpcao
+    WHERE ce.fk_Connect_idConnect = %s
+    """
+    
+    cursor.execute(query, (id_connect,))
+    resultados = cursor.fetchall()
+    
+    enquetes = []
+    for resultado in resultados:
+        # Verifica se a enquete já foi adicionada à lista
+        enquete = next((e for e in enquetes if e['idEnquete'] == resultado['idEnquete']), None)
+        if not enquete:
+            # Se não encontrou, adiciona uma nova enquete
+            enquete = {
+                'idEnquete': resultado['idEnquete'],
+                'idUsuario': resultado['fk_Usuario_idUsuario'],
+                'nomeEnquete': resultado['nomeEnquete'],
+                'opcoes': []
+            }
+            enquetes.append(enquete)
+        
+        # Adiciona a opção à enquete
+        enquete['opcoes'].append({
+            'idOpcao': resultado['idOpcao'],
+            'textoOpcao': resultado['textoOpcao'],
+            'numVotos': resultado['numVotos']
+        })
+    
+    cursor.close()
+    
+    return enquetes

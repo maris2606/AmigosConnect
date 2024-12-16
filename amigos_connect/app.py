@@ -120,12 +120,12 @@ def entrando_connect():
     session['connect'] = obter_connect_pelo_id(con,id_connect)
 
     datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
-    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis = datas_indisponiveis)
+    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis = datas_indisponiveis, enquetes = obter_informacoes_enquete_do_connect(con,session['connect']['idConnect']))
 
 @app.route("/chat.html")
 def mostrar_chat(): 
     datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
-    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis= datas_indisponiveis)
+    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis= datas_indisponiveis, enquetes = obter_informacoes_enquete_do_connect(con,session['connect']['idConnect']))
 
 @app.route("/chat.html", methods=['POST'])
 def salvar_chat(): 
@@ -151,22 +151,28 @@ def salvar_chat():
     for data in datas_formatadas: 
         salvar_data_indisponivel(con, data, session['connect']['idConnect'])
     
-    # Capture the data from the survey
     titulo_enquete = dados.get('titulo')
     alternativas_enquete = dados.get('alternativas')
 
     print(f'Título da Enquete: {titulo_enquete}')
     print(f'Alternativas da Enquete: {alternativas_enquete}')
 
-    salvar_enquete(con,titulo_enquete)
-    salvar_connect_enquete(con, session['connect']['idConnect'], obter_ultima_enquete(con))
-    for alternativa in alternativas_enquete: 
-        ultima_enquete = obter_ultima_enquete(con)
-        salvar_opcao(con,alternativa)
-        salvar_opcao_enquete(con, obter_ultima_opcao(con), ultima_enquete)
+    if(titulo_enquete is not None) and (alternativas_enquete is not None):
+        salvar_enquete(con,titulo_enquete, session['usuario']['idUsuario'])
+        salvar_connect_enquete(con, session['connect']['idConnect'], obter_ultima_enquete(con))
+        for alternativa in alternativas_enquete: 
+            ultima_enquete = obter_ultima_enquete(con)
+            salvar_opcao(con,alternativa)
+            salvar_opcao_enquete(con, obter_ultima_opcao(con), ultima_enquete)
+
+    #manipulação das opções
+    votos = dados.get('votosData')
+    if votos is not None: 
+        print(votos['idEnquete']) 
+
 
     datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
-    return render_template("chat.html", usuario=session['usuario'], connect=session['connect'], mensagens=obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis=datas_indisponiveis)
+    return render_template("chat.html", usuario=session['usuario'], connect=session['connect'], mensagens=obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis=datas_indisponiveis, enquetes = obter_informacoes_enquete_do_connect(con,session['connect']['idConnect']))
 
 @app.route("/criar-connect.html", methods=['POST'])
 def criar_connect():
@@ -197,7 +203,7 @@ def criar_connect():
             salvar_participantes_connect(con,id_p) 
      
     datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
-    return render_template("/chat.html", usuario=session['usuario'], connect = obter_ultimo_connect(con), datas_indisponiveis = datas_indisponiveis)
+    return render_template("/chat.html", usuario=session['usuario'], connect = obter_ultimo_connect(con), datas_indisponiveis = datas_indisponiveis, enquetes = obter_informacoes_enquete_do_connect(con,session['connect']['idConnect']))
 
 @app.route("/templates/participantes.html")
 def participantes():

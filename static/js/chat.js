@@ -1,5 +1,5 @@
 console.log(nome_usuario);
-
+console.log('o usuário é: ', usuario_logado);
 const btn = document.querySelector('#btn_enviar');
 const chat = document.querySelector('.chat');
 
@@ -11,29 +11,116 @@ const btn_close_enquete = document.querySelector('.close-enquete');
 
 const btn_add_data = document.querySelector('.btn-add-data');
 
-const btn_criar_enquete = document.querySelector('#criar-enquete'); // Botão para criar enquete
+const btn_criar_enquete = document.querySelector('#criar-enquete'); 
 
-btn_add_data.addEventListener("click", () => {
-    let selected = document.querySelector('.rd-day-selected');
-    if (selected) {
-        selected.classList.add('indisponivel');
+let votos = {}; // Objeto de votos, agora será por enquete
+
+// Função para atualizar as barras de progresso
+function atualizarBarras(enqueteId) {
+    let totalVotos = Object.values(votos[enqueteId]).reduce((a, b) => a + b, 0);
+
+    // Atualiza cada barra de acordo com a quantidade de votos
+    for (let nome in votos[enqueteId]) {
+        let porcentagem = totalVotos === 0 ? 0 : (votos[enqueteId][nome] / totalVotos) * 100;
+        const barra = document.getElementById(`barra-${nome.toLowerCase().replace(/\s+/g, '-')}`);
+        if (barra) {
+            barra.style.width = `${porcentagem}%`;
+        }
     }
-});
+}
 
-chat.scrollTop = chat.scrollHeight; // Rola para a mensagem mais recente
+// Função para renderizar enquetes criadas do banco de dados
+function renderizarEnquetes(enquetes) {
+    console.log('dentro de renderizar enquetes');
+    enquetes.forEach(enquete => {
+        let enqueteHTML = ''; // Inicializa a variável para armazenar o HTML da enquete
 
-let n_alt = 2; // Contador de alternativas
+        console.log('id do usuário da enquete ', enquete.idUsuario);
+        if (enquete.idUsuario == usuario_logado) {
+            enqueteHTML = `<div class="enviada p-3 d-flex">`;  // Classe "enviada" para enquetes do usuário logado
+        } else {
+            enqueteHTML = `<div class="recebida p-3 d-flex">`; // Classe "recebida" para enquetes de outros usuários
+        }
 
-// Adicionar alternativa na criação de enquete
-btn_add_alternativa.addEventListener('click', () => {
-    n_alt++;
-    const alternativaHTML = `
-    <span class="d-flex justify-content-between w-100">
-        <label class="mt-3" for="enquete_a${n_alt}">Alternativa ${n_alt}:</label>
-        <input type="text" name="alternativa-${n_alt}" id="enquete_a${n_alt}">
-    </span>`;
-    area_alternativas.insertAdjacentHTML('beforeend', alternativaHTML);
-});
+        // Adiciona a enquete ao objeto de votos
+        votos[enquete.id] = {};  // Cria um objeto de votos para essa enquete
+
+        // Inicializa os votos para as opções dessa enquete
+        enquete.opcoes.forEach(opcao => {
+            votos[enquete.id][opcao.textoOpcao] = 0;  // Inicializa o contador de votos para cada alternativa
+        });
+
+        // Adiciona o título e as opções de voto da enquete
+        enqueteHTML += `
+            <form class="enquete-container" action="" method="post">
+                <p class="enquete-titulo">${enquete.nomeEnquete}</p>
+                ${enquete.opcoes.map(opcao => `
+                    <div class="opcao">
+                        <span class="d-flex">
+                            <input type="radio" name="opt-${enquete.id}" class="voto" data-nome="${opcao.textoOpcao}" data-enquete-id="${enquete.id}" id="opt-${opcao.textoOpcao.toLowerCase().replace(/\s+/g, '-')}" />
+                            <label class="pl-3" for="opt-${opcao.textoOpcao.toLowerCase().replace(/\s+/g, '-')}" >${opcao.textoOpcao}</label>
+                        </span>
+                        <div class="barra">
+                            <div class="barra-preenchida" id="barra-${opcao.textoOpcao.toLowerCase().replace(/\s+/g, '-')}" style="width: 0%;"></div>
+                        </div>
+                    </div>`).join('')}
+            </form>
+        </div>`;
+
+        // Adiciona a enquete ao chat
+        chat.insertAdjacentHTML('beforeend', enqueteHTML);
+
+        // Adiciona eventos para atualizar os votos e as barras
+        document.querySelectorAll(`.voto[data-enquete-id="${enquete.id}"]`).forEach(radio => {
+            radio.addEventListener("change", (e) => {
+                const nome = e.target.dataset.nome;
+                const idEnquete = e.target.dataset.enqueteId;
+
+                // Atualiza os votos na estrutura
+                if (e.target.checked) {
+                    votos[idEnquete][nome]++;
+                }
+
+                // Atualiza as barras para essa enquete
+                atualizarBarras(idEnquete);
+
+                // Envia os votos para o servidor
+                enviarVotos(idEnquete);
+            });
+        });
+    });
+
+    // Atualiza a rolagem do chat para mostrar as enquetes renderizadas
+    chat.scrollTop = chat.scrollHeight;
+}
+
+// Função para enviar os votos ao servidor
+function enviarVotos(idEnquete) {
+    const votosEnquete = votos[idEnquete];
+
+    const votosData = {
+        enqueteId: idEnquete,
+        votos: votosEnquete
+    };
+
+    fetch('/chat.html', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(votosData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Votos enviados com sucesso:', data);
+    })
+    .catch(error => {
+        console.error('Erro ao enviar votos:', error);
+    });
+}
+
+// Renderizar enquetes puxadas do banco de dados
+renderizarEnquetes(enquetes);
 
 // Função para resetar o formulário de criação de enquete
 function resetar_alternativas() {
@@ -54,48 +141,41 @@ function resetar_alternativas() {
 btn_cancelar_enquete.addEventListener('click', resetar_alternativas);
 btn_close_enquete.addEventListener('click', resetar_alternativas);
 
-// Objeto de votos para a nova enquete
-let votos = {};
-
-// Função para atualizar as barras de progresso
-function atualizarBarras() {
-    let totalVotos = Object.values(votos).reduce((a, b) => a + b, 0);
-
-    // Atualiza cada barra de acordo com a quantidade de votos
-    for (let nome in votos) {
-        let porcentagem = totalVotos === 0 ? 0 : (votos[nome] / totalVotos) * 100;
-        const barra = document.getElementById(`barra-${nome.toLowerCase().replace(/\s+/g, '-')}`);
-        if (barra) {
-            barra.style.width = `${porcentagem}%`;
-        }
-    }
-}
+// Adicionar alternativa na criação de enquete
+let n_alt = 2; // Contador de alternativas
+btn_add_alternativa.addEventListener('click', () => {
+    n_alt++;
+    const alternativaHTML = `
+    <span class="d-flex justify-content-between w-100">
+        <label class="mt-3" for="enquete_a${n_alt}">Alternativa ${n_alt}:</label>
+        <input type="text" name="alternativa-${n_alt}" id="enquete_a${n_alt}">
+    </span>`;
+    area_alternativas.insertAdjacentHTML('beforeend', alternativaHTML);
+});
 
 // Criação dinâmica da enquete
 btn_criar_enquete.addEventListener('click', () => {
     // Captura os dados do formulário de criação
     const titulo = document.querySelector('#nome-enquete').value.trim() || "Enquete";
     const alternativas = [];
+    const idEnquete = Date.now();  // Gerando um ID único para a enquete
+
     document.querySelectorAll('[id^="enquete_a"]').forEach(input => {
         const valor = input.value.trim();
         if (valor) {
             alternativas.push(valor);
-            votos[valor] = 0; // Inicializa os votos para cada alternativa
+            votos[idEnquete] = votos[idEnquete] || {};  // Inicializa a estrutura de votos para esta enquete
+            votos[idEnquete][valor] = 0;  // Inicializa o contador de votos
         }
     });
 
-    if (alternativas.length < 2) {
-        alert('Por favor, adicione pelo menos duas alternativas para criar a enquete.');
-        return;
-    }
-
-    //mandando a enquete para o python
+    // Envia os dados para o Flask via fetch
     const enqueteData = {
+        id: idEnquete,
         titulo: titulo,
         alternativas: alternativas
     };
 
-    // Envia os dados para o Flask via fetch
     fetch('/chat.html', {
         method: 'POST',
         headers: {
@@ -119,8 +199,8 @@ btn_criar_enquete.addEventListener('click', () => {
             ${alternativas.map(alt => `
             <div class="opcao">
                 <span class="d-flex">
-                    <input type="radio" name="opt" class="voto" data-nome="${alt}" id="${alt.toLowerCase().replace(/\s+/g, '-')}">
-                    <label class="pl-3" for="${alt.toLowerCase().replace(/\s+/g, '-')}">${alt}</label>
+                    <input type="radio" name="opt-${idEnquete}" class="voto" data-nome="${alt}" data-enquete-id="${idEnquete}" id="opt-${alt.toLowerCase().replace(/\s+/g, '-')}" />
+                    <label class="pl-3" for="opt-${alt.toLowerCase().replace(/\s+/g, '-')}" >${alt}</label>
                 </span>
                 <div class="barra">
                     <div class="barra-preenchida" id="barra-${alt.toLowerCase().replace(/\s+/g, '-')}" style="width: 0%;"></div>
@@ -133,15 +213,17 @@ btn_criar_enquete.addEventListener('click', () => {
     chat.insertAdjacentHTML('beforeend', enqueteHTML);
 
     // Adiciona eventos de clique para as novas opções de voto
-    document.querySelectorAll(".voto").forEach(radio => {
+    document.querySelectorAll(`.voto[data-enquete-id="${idEnquete}"]`).forEach(radio => {
         radio.addEventListener("change", (e) => {
             const nome = e.target.dataset.nome;
+            const idEnquete = e.target.dataset.enqueteId;
 
             if (e.target.checked) {
-                votos[nome]++;
+                votos[idEnquete][nome]++;
             }
 
-            atualizarBarras();
+            atualizarBarras(idEnquete);
+            enviarVotos(idEnquete);
         });
     });
 
