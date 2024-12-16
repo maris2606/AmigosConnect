@@ -112,6 +112,62 @@ def entrar():
     else: 
         return render_template("login.html")
 
+
+
+@app.route("/meus-connects.html", methods=['POST'])
+def entrando_connect():
+    id_connect = request.form['id_connect'].strip()
+    session['connect'] = obter_connect_pelo_id(con,id_connect)
+
+    datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
+    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis = datas_indisponiveis)
+
+@app.route("/chat.html")
+def mostrar_chat(): 
+    datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
+    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis= datas_indisponiveis)
+
+@app.route("/chat.html", methods=['POST'])
+def salvar_chat(): 
+    dados = request.get_json()  # Captura os dados JSON enviados
+    msg = dados.get('msg')  # Pega a mensagem
+    dataHora = dados.get('dataHora')  # Pega a data e hora
+
+    if msg is not None: 
+        mensagem = Mensagem(None,msg,dataHora, session['usuario']['idUsuario'], session['connect']['idConnect'])
+        salvar_mensagem(con, mensagem)
+
+    # Salvar calendário
+    calendario = dados.get('datas')
+    print(f'datas: {calendario}')
+    datas_formatadas = []
+    if calendario is not None: 
+        for data in calendario:
+            data = data.replace(" ", "")
+            data_obj = datetime.strptime(data, '%d/%m/%Y')  
+            datas_formatadas.append(data_obj.strftime('%Y-%m-%d'))
+
+    print(f'Datas formatadas: {datas_formatadas}')
+    for data in datas_formatadas: 
+        salvar_data_indisponivel(con, data, session['connect']['idConnect'])
+    
+    # Capture the data from the survey
+    titulo_enquete = dados.get('titulo')
+    alternativas_enquete = dados.get('alternativas')
+
+    print(f'Título da Enquete: {titulo_enquete}')
+    print(f'Alternativas da Enquete: {alternativas_enquete}')
+
+    salvar_enquete(con,titulo_enquete)
+    salvar_connect_enquete(con, session['connect']['idConnect'], obter_ultima_enquete(con))
+    for alternativa in alternativas_enquete: 
+        ultima_enquete = obter_ultima_enquete(con)
+        salvar_opcao(con,alternativa)
+        salvar_opcao_enquete(con, obter_ultima_opcao(con), ultima_enquete)
+
+    datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
+    return render_template("chat.html", usuario=session['usuario'], connect=session['connect'], mensagens=obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis=datas_indisponiveis)
+
 @app.route("/criar-connect.html", methods=['POST'])
 def criar_connect():
     nome_connect = request.form['nome-connect'].strip()
@@ -142,45 +198,6 @@ def criar_connect():
      
     datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
     return render_template("/chat.html", usuario=session['usuario'], connect = obter_ultimo_connect(con), datas_indisponiveis = datas_indisponiveis)
-
-
-@app.route("/meus-connects.html", methods=['POST'])
-def entrando_connect():
-    id_connect = request.form['id_connect'].strip()
-    session['connect'] = obter_connect_pelo_id(con,id_connect)
-
-    datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
-    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis = datas_indisponiveis)
-
-@app.route("/chat.html")
-def mostrar_chat(): 
-    datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
-    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis= datas_indisponiveis)
-
-@app.route("/chat.html", methods=['POST'])
-def salvar_chat(): 
-    #salvar mensagem
-    dados = request.get_json() 
-    msg = dados.get('msg') 
-    dataHora = dados.get('dataHora')
-    mensagem = Mensagem(None,msg,dataHora, session['usuario']['idUsuario'],session['connect']['idConnect'])
-    salvar_mensagem(con,mensagem)
-
-    #salvar calendário
-    calendario = dados.get('datas')
-    print(f'datas{calendario}')
-    datas_formatadas = []
-    for data in calendario:
-        data = data.replace(" ", "")
-        data_obj = datetime.strptime(data, '%d/%m/%Y')  
-        datas_formatadas.append(data_obj.strftime('%Y-%m-%d'))
-
-    print(f'Datas formatadas: {datas_formatadas}')
-    for data in datas_formatadas: 
-        salvar_data_indisponivel(con, data, session['connect']['idConnect'])
-    
-    datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
-    return render_template("chat.html", usuario = session['usuario'], connect = session['connect'], mensagens = obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis= datas_indisponiveis)
 
 @app.route("/templates/participantes.html")
 def participantes():

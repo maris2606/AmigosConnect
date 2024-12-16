@@ -216,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>  
                 {% endfor %}
             </div>
+            
 
             <div class="row barra-mensagem w-100  d-flex justify-content-center align-items-end">
                 <form class="d-flex justify-content-center align-items-center " action="" method="post">
@@ -266,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <form action="" method="post" class="p-5 modal-body d-flex flex-column align-items-start justify-content-center">
                   
                         <label class="mt-3" for="nome">Nome da enquete:</label>
-                        <input class="input-text w-100" type="text" name="nome" id="nome" placeholder="Digite o que será votado">
+                        <input class="input-text w-100" type="text" name="nome" id="nome-enquete" placeholder="Digite o que será votado">
                     
                         <div class="alternativas-adicionadas w-100">
                             <!-- aqui precisa colocar o id da enquete tá -->
@@ -281,14 +282,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             </span>
                         </div>
 
-                        <button class="btn-add-alternativa" type="button">adicionar alternativa</button>
+                        <button class="btn-add-alternativa" type="button">Adicionar alternativa</button>
 
 
                 </form>
 
                 <div class="modal-footer p-3">
                     <button type="button" class="px-5 btn-laranja-outline cancelar-enquete" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="px-5 btn-laranja">Criar enquete</button>
+                    <button type="button" class="px-5 btn-laranja" id="criar-enquete">Criar enquete</button>
                 </div>
             </div>
         </div>
@@ -333,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header p-4">
-                    <h1 class="modal-title" id="titulo_modal_calendario">Ver calendario</h1>
+                    <h1 class="modal-title" id="titulo_modal_calendario">Ver calendário</h1>
                     <button type="button" class="close close-calendario" data-dismiss="modal" aria-label="Close">
                         <span style="font-size: 3rem;" aria-hidden="true">&times;</span>
                     </button>
@@ -352,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                    
-                    <button class="btn-add-data" type="button">adicionar data indiponível</button>
+                    <button class="btn-add-data" type="button">Adicionar data indiponível</button>
                 </div>
 
                 <div class="modal-footer p-3">

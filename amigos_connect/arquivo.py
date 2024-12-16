@@ -201,23 +201,6 @@ def obter_connects_por_usuario(con, id_usuario):
 
     return connects
 
-
-# def salvar_calendario(con, calendario):
-#     cursor = con.cursor()
-
-#     sql = 'INSERT INTO Calendario (fk_Connect_idConnect) VALUES (%s)'
-    
-#     valores = (
-#         calendario.get_connect_id(),  
-#     )
-
-#     cursor.execute(sql, valores)
-
-#     con.commit()
-
-#     cursor.close()
-
-
 def salvar_data_indisponivel(con, data_indisponivel, id_connect):
     cursor = con.cursor()
 
@@ -238,20 +221,94 @@ def buscar_datas_indisponiveis(con, id_connect):
     valores = (id_connect,)
     cursor.execute(sql, valores)
     
-    # Recupera todas as datas e formata para um formato ISO
     resultados = cursor.fetchall()
     datas_indisponiveis = [resultado[0].strftime('%Y-%m-%d') for resultado in resultados]
     cursor.close()
     
     return datas_indisponiveis
 
+#salvar enquetes
+
+def salvar_enquete(con, nomeEnquete):
+    cursor = con.cursor()
+    sql = 'INSERT INTO Enquete (nomeEnquete) VALUES (%s)'
+    valores = (nomeEnquete,)
+    cursor.execute(sql,valores)
+    con.commit()
+    cursor.close()
+
+def obter_ultima_enquete(con):
+    cursor = con.cursor(dictionary=True)
+    sql = "SELECT * FROM Enquete ORDER BY idEnquete DESC LIMIT 1"
+    cursor.execute(sql)
+
+    ultima_enquete = cursor.fetchone()  
+    con.commit()
+
+    return ultima_enquete['idEnquete']
+
+def salvar_opcao(con, texto_opcao):
+    cursor = con.cursor()
+    sql = 'INSERT INTO Opcao (numVotos, textoOpcao) VALUES (%s, %s)'
+    valores = (0, texto_opcao)  # Inicialmente, numVotos é 0
+    cursor.execute(sql, valores)
+    con.commit()
+    cursor.close()
+
+def obter_ultima_opcao(con):
+    cursor = con.cursor(dictionary=True)
+    sql = "SELECT * FROM Opcao ORDER BY idOpcao DESC LIMIT 1"
+    cursor.execute(sql)
+
+    ultima_opcao = cursor.fetchone()  
+    con.commit()
+
+    return ultima_opcao['idOpcao']
+
+def salvar_connect_enquete(con, id_connect, id_enquete):
+    cursor = con.cursor()
+    sql = 'INSERT INTO Connect_Enquete (fk_Connect_idConnect, fk_Enquete_idEnquete) VALUES (%s, %s)'
+    valores = (id_connect, id_enquete)
+    cursor.execute(sql, valores)
+    con.commit()
+    cursor.close()
 
 
-# def obter_ultimo_calendario(con):
-#     cursor = con.cursor(dictionary=True)
-#     sql = "SELECT * FROM calendario ORDER BY idCalendario DESC LIMIT 1"
-#     cursor.execute(sql)
+def salvar_opcao_enquete(con, id_opcao, id_enquete):
+    cursor = con.cursor()
+    sql = 'INSERT INTO Opcao_Enquete (fk_Opcao_idOpcao, fk_Enquete_idEnquete) VALUES (%s, %s)'
+    valores = (id_opcao, id_enquete)
+    cursor.execute(sql, valores)
+    con.commit()
+    cursor.close()
 
-#     ultimo_calendario = cursor.fetchone()
 
-#     return ultimo_calendario['idCalendario']
+def obter_opcoes_por_enquete(con, id_enquete):
+    cursor = con.cursor(dictionary=True)
+    sql = """
+        SELECT O.idOpcao, O.textoOpcao, O.numVotos
+        FROM Opcao O
+        JOIN Opcao_Enquete OE ON O.idOpcao = OE.fk_Opcao_idOpcao
+        WHERE OE.fk_Enquete_idEnquete = %s
+    """
+    cursor.execute(sql, (id_enquete,))
+    opcoes = []
+
+    for registro in cursor:
+        opcoes.append({
+            'idOpcao': registro['idOpcao'],
+            'textoOpcao': registro['textoOpcao'],
+            'numVotos': registro['numVotos']
+        })
+    
+    cursor.close()
+    return opcoes
+
+
+#votos
+def atualizar_voto_opcao(con, id_opcao):
+    cursor = con.cursor()
+    sql = 'UPDATE Opcao SET numVotos = numVotos + 1 WHERE idOpcao = %s'
+    cursor.execute(sql, (id_opcao,))
+    con.commit()
+    cursor.close()
