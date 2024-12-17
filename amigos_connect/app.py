@@ -32,7 +32,7 @@ def index():
 
 @app.route("/login.html")
 def login(): 
-    return render_template("login.html")
+    return render_template("login.html", erro='d-none')
 
 @app.route("/cadastro.html")
 def cadastro(): 
@@ -84,7 +84,7 @@ def cadastrar():
     if senha == confirma_senha:
         usuario = Usuario(None, email, usuario, status, senha, nome)
         salvar_usuario(con, usuario)
-        return render_template("login.html")
+        return render_template("login.html", erro='d-none')
     else: 
         return render_template("cadastro.html")
 
@@ -110,7 +110,7 @@ def entrar():
     if contem:
         return render_template("feed.html", usuario = session['usuario'])
     else: 
-        return render_template("login.html")
+        return render_template("login.html", erro = 'd-block')
 
 
 
@@ -213,11 +213,6 @@ def participantes():
 def unavailable_dates():
     datas = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
     return jsonify(datas)
-
-@app.route('/chat.html', methods=['GET'])
-def obter_enquetes():
-    enquetes = obter_informacoes_enquete_do_connect(con,session['connect'['idConnect']])
-    return jsonify({'enquetes': enquetes})
 
 conexao_fechar(con)
 
