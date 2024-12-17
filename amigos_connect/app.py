@@ -17,7 +17,7 @@ from model.Calendario import Calendario
 
 app = Flask("Amigos_Connect")
 app.secret_key = "uma_chave_secreta" 
-con = conexao_abrir("localhost", "root", "Millena03*", "amigosconnect")
+con = conexao_abrir("localhost", "root", "Jossana@0308", "amigosconnect")
 
 app.config['SESSION_TYPE'] = 'filesystem'  # Ou use 'redis' para maior escalabilidade
 app.config['SESSION_FILE_DIR'] = './flask_session'  # Diretório local para sessões
@@ -200,7 +200,7 @@ def criar_connect():
         if type(id_p) == int:
             salvar_participantes_connect(con,id_p) 
 
-    connect = obter_ultimo_connect(con);
+    connect = obter_ultimo_connect(con)
     session['connect'] = connect 
     datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
     return render_template("/chat.html", usuario=session['usuario'], connect = obter_ultimo_connect(con), datas_indisponiveis = datas_indisponiveis, enquetes = obter_informacoes_enquete_do_connect(con,session['connect']['idConnect']))
