@@ -214,6 +214,11 @@ def unavailable_dates():
     datas = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
     return jsonify(datas)
 
+@app.route('/chat.html', methods=['GET'])
+def obter_enquetes():
+    enquetes = obter_informacoes_enquete_do_connect(con,session['connect'['idConnect']])
+    return jsonify({'enquetes': enquetes})
+
 conexao_fechar(con)
 
 app.run(debug=True)

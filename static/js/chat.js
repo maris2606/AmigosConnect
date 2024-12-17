@@ -17,7 +17,7 @@ let votos = {}; // Objeto de votos, agora será por enquete
 
 // Função para atualizar as barras de progresso
 function atualizarBarras(enqueteId) {
-    let totalVotos = Object.values(votos[enqueteId]).reduce((a, b) => a + b, 0);
+    let totalVotos = getTotalVotos(enqueteId);
 
     // Atualiza cada barra de acordo com a quantidade de votos
     for (let nome in votos[enqueteId]) {
@@ -42,15 +42,12 @@ function renderizarEnquetes(enquetes) {
             enqueteHTML = `<div class="recebida p-3 d-flex">`; // Classe "recebida" para enquetes de outros usuários
         }
 
-        // Certifique-se de que o ID da enquete esteja sendo capturado corretamente
         const idEnquete = enquete.idEnquete; // Agora estamos acessando o id da enquete corretamente
 
-        // Adiciona a enquete ao objeto de votos
-        votos[idEnquete] = {};  
-
         // Inicializa os votos para as opções dessa enquete
+        votos[idEnquete] = {};
         enquete.opcoes.forEach(opcao => {
-            votos[idEnquete][opcao.textoOpcao] = 0;  // Inicializa o contador de votos para cada alternativa
+            votos[idEnquete][opcao.textoOpcao] = opcao.numVotos || 0;  // Inicializa com o número de votos da opção (caso já venha do servidor)
         });
 
         // Adiciona o título e as opções de voto da enquete
@@ -64,7 +61,7 @@ function renderizarEnquetes(enquetes) {
                             <label class="pl-3" for="opt-${opcao.textoOpcao.toLowerCase().replace(/\s+/g, '-')}" >${opcao.textoOpcao}</label>
                         </span>
                         <div class="barra">
-                            <div class="barra-preenchida" id="barra-${opcao.idOpcao}" style="width: 0%;"></div>
+                            <div class="barra-preenchida" id="barra-${opcao.idOpcao}" style="width: ${(votos[idEnquete][opcao.textoOpcao] / getTotalVotos(idEnquete)) * 100}%;"></div>
                         </div>
                     </div>`).join('')}
             </form>
@@ -78,17 +75,15 @@ function renderizarEnquetes(enquetes) {
             radio.addEventListener("change", (e) => {
                 const nome = e.target.dataset.nome;
                 const idEnquete = e.target.dataset.enqueteId;
-                const idOpcao = e.target.id;  // ID da opção selecionada
 
-                if (e.target.checked) {
-                    votos[idEnquete][nome]++;
-                }
+                // Incrementa o número de votos para a opção selecionada
+                votos[idEnquete][nome]++;
+                
 
-                // Atualiza as barras para essa enquete
-                atualizarBarras(idEnquete);
-
-                // Envia os votos para o servidor, incluindo o ID da opção selecionada
+                // Envia os votos para o servidor
+                const idOpcao = e.target.id;
                 enviarVotos(idEnquete, idOpcao);
+                atualizarBarras(idEnquete); 
             });
         });
     });
@@ -99,9 +94,7 @@ function renderizarEnquetes(enquetes) {
 
 // Função para enviar os votos ao servidor
 function enviarVotos(idEnquete, idOpcao) {
-    // Garantir que votosData esteja preenchido corretamente
- 
-    console.log('Enviando dados de votos:', idEnquete, idOpcao); // Verifique se está correto
+    console.log('Enviando dados de votos:', idEnquete, idOpcao);
 
     fetch('/chat.html', {
         method: 'POST',
@@ -110,14 +103,7 @@ function enviarVotos(idEnquete, idOpcao) {
         },
         body: JSON.stringify({ idEnquete: idEnquete, idOpcaoAlterada: idOpcao }) // Envia os dados como JSON
     })
-    .then(response => {
-        // Verifica se a resposta é JSON antes de tentar analisá-la
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Erro na resposta do servidor: ' + response.statusText);
-        }
-    })
+    .then(response => response.json())
     .then(data => {
         console.log('Votos enviados com sucesso:', data);
     })
@@ -126,6 +112,10 @@ function enviarVotos(idEnquete, idOpcao) {
     });
 }
 
+// Função para calcular o total de votos de uma enquete
+function getTotalVotos(idEnquete) {
+    return Object.values(votos[idEnquete]).reduce((a, b) => a + b, 0);  // Soma os votos de todas as opções
+}
 
 // Renderizar enquetes puxadas do banco de dados
 renderizarEnquetes(enquetes);
@@ -204,41 +194,18 @@ btn_criar_enquete.addEventListener('click', () => {
     <div class="enviada p-3 d-flex">
         <form class="enquete-container" action="" method="post">
             <p class="enquete-titulo">${titulo}</p>
-            ${alternativas.map(alt => `
-            <div class="opcao">
-                <span class="d-flex">
-                    <input type="radio" name="opt-${idEnquete}" class="voto" data-nome="${alt}" data-enquete-id="${idEnquete}" id="opt-${alt.toLowerCase().replace(/\s+/g, '-')}" />
-                    <label class="pl-3" for="opt-${alt.toLowerCase().replace(/\s+/g, '-')}" >${alt}</label>
-                </span>
-                <div class="barra">
-                    <div class="barra-preenchida" id="barra-${alt.toLowerCase().replace(/\s+/g, '-')}" style="width: 0%;"></div>
-                </div>
-            </div>`).join('')}
+            ${alternativas.map(opcao => `
+                <div class="opcao">
+                    <span class="d-flex">
+                        <input type="radio" name="opt-${idEnquete}" class="voto" data-nome="${opcao}" data-enquete-id="${idEnquete}" id="${opcao}" />
+                        <label class="pl-3" for="opt-${opcao.toLowerCase().replace(/\s+/g, '-')}" >${opcao}</label>
+                    </span>
+                    <div class="barra">
+                        <div class="barra-preenchida" id="barra-${opcao.toLowerCase().replace(/\s+/g, '-')}" style="width: 0%;"></div>
+                    </div>
+                </div>`).join('')}
         </form>
     </div>`;
-
-    // Adiciona a enquete ao chat
     chat.insertAdjacentHTML('beforeend', enqueteHTML);
-
-    // Adiciona eventos de clique para as novas opções de voto
-    document.querySelectorAll(`.voto[data-enquete-id="${idEnquete}"]`).forEach(radio => {
-        radio.addEventListener("change", (e) => {
-            const nome = e.target.dataset.nome;
-            const idEnquete = e.target.dataset.enqueteId;
-            const idOpcao = e.target.id;  // ID da opção selecionada
-
-            if (e.target.checked) {
-                votos[idEnquete][nome]++;  // Atualiza o voto para essa opção
-            }
-
-            atualizarBarras(idEnquete);
-            enviarVotos(idEnquete, idOpcao);
-        });
-    });
-
-    // Atualiza a rolagem do chat para mostrar a nova enquete
-    chat.scrollTop = chat.scrollHeight;
-
-    // Reseta o formulário
-    resetar_alternativas();
+    resetar_alternativas(); // Resetando o formulário após a criação
 });
