@@ -139,7 +139,6 @@ def salvar_chat():
 
     # Salvar calendário
     calendario = dados.get('datas')
-    print(f'datas: {calendario}')
     datas_formatadas = []
     if calendario is not None: 
         for data in calendario:
@@ -147,7 +146,6 @@ def salvar_chat():
             data_obj = datetime.strptime(data, '%d/%m/%Y')  
             datas_formatadas.append(data_obj.strftime('%Y-%m-%d'))
 
-    print(f'Datas formatadas: {datas_formatadas}')
     for data in datas_formatadas: 
         salvar_data_indisponivel(con, data, session['connect']['idConnect'])
     
@@ -166,10 +164,10 @@ def salvar_chat():
             salvar_opcao_enquete(con, obter_ultima_opcao(con), ultima_enquete)
 
     #manipulação das opções
-    votos = dados.get('votosData')
-    if votos is not None: 
-        print(votos['idEnquete']) 
-
+    opcao_alterada = dados.get('idOpcaoAlterada')
+    print(f'TESTE VOTOS: {opcao_alterada}')
+    if opcao_alterada is not None: 
+        atualizar_voto_opcao(con,opcao_alterada)
 
     datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
     return render_template("chat.html", usuario=session['usuario'], connect=session['connect'], mensagens=obter_mensagens_do_connect(con, session['connect']['idConnect']), datas_indisponiveis=datas_indisponiveis, enquetes = obter_informacoes_enquete_do_connect(con,session['connect']['idConnect']))
@@ -201,7 +199,9 @@ def criar_connect():
     for id_p in id_participantes_connect:
         if type(id_p) == int:
             salvar_participantes_connect(con,id_p) 
-     
+
+    connect = obter_ultimo_connect(con);
+    session['connect'] = connect 
     datas_indisponiveis = buscar_datas_indisponiveis(con, session['connect']['idConnect'])
     return render_template("/chat.html", usuario=session['usuario'], connect = obter_ultimo_connect(con), datas_indisponiveis = datas_indisponiveis, enquetes = obter_informacoes_enquete_do_connect(con,session['connect']['idConnect']))
 
