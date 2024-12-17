@@ -37,14 +37,13 @@ html{
 }
 
 
-
-
 #pfp_usuario{
     height: 40px;
     border-radius: 100px;
 }
 
 .logo {
+    height: 35% !important;
     width: 180px;
     margin-bottom: 40%;
 }
@@ -292,8 +291,8 @@ html{
 }
 
 .img-connect{
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     border-radius: 200px;
 }
 
