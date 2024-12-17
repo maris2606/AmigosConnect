@@ -37,6 +37,8 @@ html{
 }
 
 
+
+
 #pfp_usuario{
     height: 40px;
     border-radius: 100px;
@@ -193,7 +195,7 @@ html{
 }
 
 .img-connect {
-    height: 55px;
+    height: 80%;
 }
 
 .chat{
